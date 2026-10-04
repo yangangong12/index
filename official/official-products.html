@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>产品服务 - 阳安科技</title>
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="stylesheet" href="official.css">
+    <style>
+        .product-detail-section { padding: 80px 0; }
+        .product-detail-section:nth-child(even) { background: #fff; }
+        .product-showcase { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .product-showcase.reverse { direction: rtl; }
+        .product-showcase.reverse > * { direction: ltr; }
+        .product-showcase .visual { text-align: center; }
+        .product-showcase .visual .big-icon { font-size: 8rem; display: block; }
+        .product-showcase .info h2 { font-size: 2rem; font-weight: 700; margin-bottom: 16px; }
+        .product-showcase .info h2 span { color: var(--primary); }
+        .product-showcase .info .desc { color: var(--text-light); font-size: 1.05rem; line-height: 1.8; margin-bottom: 24px; }
+        .product-showcase .info .feature-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 24px; }
+        .product-showcase .info .feature-tag { padding: 6px 16px; background: var(--primary-bg); color: var(--primary); border-radius: 50px; font-size: 0.85rem; font-weight: 500; }
+        .shop-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
+        .shop-card { background: #fff; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); transition: all var(--transition); cursor: pointer; }
+        .shop-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+        .shop-card .thumb { height: 180px; background: #f0f0f0; display: flex; align-items: center; justify-content: center; font-size: 3rem; overflow: hidden; }
+        .shop-card .thumb img { width: 100%; height: 100%; object-fit: cover; }
+        .shop-card .body { padding: 16px; }
+        .shop-card .body .name { font-weight: 600; font-size: 0.95rem; margin-bottom: 6px; }
+        .shop-card .body .price { color: var(--danger); font-weight: 700; font-size: 1.1rem; }
+        @media (max-width: 768px) {
+            .product-showcase { grid-template-columns: 1fr; gap: 32px; text-align: center; }
+            .product-showcase .info .feature-tags { justify-content: center; }
+            .product-showcase .visual .big-icon { font-size: 5rem; }
+            .shop-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+            .shop-card .thumb { height: 140px; }
+        }
+        @media (max-width: 480px) {
+            .shop-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="nav" id="navbar">
+    <div class="container">
+        <a href="official.html" class="nav-logo"><div class="logo-icon">阳</div>阳安科技</a>
+        <div class="nav-links" id="navLinks">
+            <a href="official.html">首页</a>
+            <a href="official-products.html" class="active">产品服务</a>
+            <a href="official-articles.html">文章</a>
+            <a href="official-download.html">下载中心</a>
+            <a href="official-about.html">关于我们</a>
+            <a href="official-contact.html">联系我们</a>
+        </div>
+        <div class="nav-cta">
+            <a href="https://shop.yangan.top" class="btn btn-outline btn-sm" target="_blank">商城</a>
+            <a href="https://chat.yanga.top" class="btn btn-primary btn-sm" target="_blank">AI聊天</a>
+        </div>
+        <button class="hamburger" id="hamburger" aria-label="菜单"><span></span><span></span><span></span></button>
+    </div>
+</nav>
+<div class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-inner">
+        <a href="official.html" class="mobile-nav-item"><span class="icon">🏠</span><span>首页</span></a>
+        <a href="official-products.html" class="mobile-nav-item active"><span class="icon">📦</span><span>产品</span></a>
+        <a href="official-articles.html" class="mobile-nav-item"><span class="icon">📰</span><span>文章</span></a>
+        <a href="official-download.html" class="mobile-nav-item"><span class="icon">📥</span><span>下载</span></a>
+    </div>
+</div><!-- NAV -->
+<nav class="nav" id="navbar">
+    <div class="container">
+        <a href="official.html" class="nav-logo"><div class="logo-icon"><img src="../favicon.ico"></div>沈阳阳安信息科技技术有限公司</a>
+        <div class="nav-links" id="navLinks">
+            <a href="official.html" class="active">首页</a>
+            <a href="official-products.html">产品服务</a>
+            <a href="official-articles.html">文章发布</a>
+            <a href="official-download.html">下载中心</a>
+            <a href="official-about.html">关于我们</a>
+            <a href="official-contact.html">联系我们</a>
+        </div>
+        <div class="nav-cta">
+            <a href="https://shop.yangan.top" class="btn btn-outline btn-sm" target="_blank">阳安云聊商城</a>
+            <a href="https://chat.yangan.top" class="btn btn-primary btn-sm" target="_blank">阳安小工具</a>
+        </div>
+        <button class="hamburger" id="hamburger" aria-label="菜单"><span></span><span></span><span></span></button>
+    </div>
+</nav>
+<div class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-inner">
+        <a href="official.html" class="mobile-nav-item active"><span class="icon">🏠</span><span>首页</span></a>
+        <a href="official-products.html" class="mobile-nav-item"><span class="icon">📦</span><span>产品</span></a>
+        <a href="official-articles.html" class="mobile-nav-item"><span class="icon">📰</span><span>文章</span></a>
+        <a href="official-download.html" class="mobile-nav-item"><span class="icon">📥</span><span>下载</span></a>
+    </div>
+</div>
+
+
+<div class="page-header">
+    <div class="container">
+        <div class="page-tag">产品服务</div>
+        <h1>全方位数字化产品矩阵</h1>
+        <p>四大核心产品，覆盖即时通讯、电子商务、小工具，一站式满足您的数字生活需求</p>
+    </div>
+</div>
+
+<!-- 阳安云聊 -->
+<section class="product-detail-section" id="chat">
+    <div class="container">
+        <div class="product-showcase">
+            <div class="visual fade-in"><span class="big-icon">💬</span></div>
+            <div class="info fade-in">
+                <div class="section-tag">即时通讯</div>
+                <h2>阳安<span>云聊</span></h2>
+                <p class="desc">智能即时通讯平台，支持文字、图片、文件传输，群聊与私聊自由切换。内置红包与转账功能，让沟通更高效、更有趣。支持Windows、Android、iOS全平台，数据云端同步。</p>
+                <div class="feature-tags">
+                    <span class="feature-tag">群聊私聊</span><span class="feature-tag">文件传输</span><span class="feature-tag">红包转账</span><span class="feature-tag">多端同步</span><span class="feature-tag">扫码登录</span>
+                </div>
+                <a href="https://yangan.top" class="btn btn-primary" target="_blank">进入阳安云聊</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 阳安商城 -->
+<section class="product-detail-section" id="shop">
+    <div class="container">
+        <div class="product-showcase reverse">
+            <div class="visual fade-in"><span class="big-icon">🛒</span></div>
+            <div class="info fade-in">
+                <div class="section-tag">电子商务</div>
+                <h2>阳安<span>商城</span></h2>
+                <p class="desc">全品类在线购物平台，提供商品浏览、购物车、订单管理、优惠券系统等完整电商功能。支持余额支付，安全便捷的购物体验。</p>
+                <div class="feature-tags">
+                    <span class="feature-tag">商品管理</span><span class="feature-tag">购物车</span><span class="feature-tag">优惠券</span><span class="feature-tag">余额支付</span><span class="feature-tag">订单追踪</span>
+                </div>
+                <a href="https://shop.yangan.top" class="btn btn-accent" target="_blank">前往商城购物</a>
+            </div>
+        </div>
+        <!-- 嵌入商城商品 -->
+        <div style="margin-top:60px;" class="fade-in">
+            <div class="section-header"><div class="section-tag">商城精选</div><h2 class="section-title">热门商品推荐</h2></div>
+            <div class="shop-grid" id="shopGrid"><div class="loading-wrap"><div class="loading-spinner"></div>加载商品中...</div></div>
+            <div style="text-align:center;margin-top:24px;"><a href="https://shop.yangan.top" class="btn btn-outline" target="_blank">查看全部商品 →</a></div>
+        </div>
+    </div>
+</section>
+
+
+<!-- AI聊天 -->
+<section class="product-detail-section" id="ai">
+    <div class="container">
+        <div class="product-showcase reverse">
+            <div class="visual fade-in"><span class="big-icon">🤖</span></div>
+            <div class="info fade-in">
+                <div class="section-tag">云端小工具</div>
+                <h2>多种<span>在线工具</span></h2>
+                <p class="desc">基于先进AI技术支持在线塔罗牌解析，十六人格测试，周易算卦，ai生成器，加密数据生成等众多功能</p>
+                <div class="feature-tags">
+                    <span class="feature-tag">多轮对话</span><span class="feature-tag">知识问答</span><span class="feature-tag">内容创作</span><span class="feature-tag">代码辅助</span>
+                </div>
+                <a href="https://chat.yangan.top" class="btn btn-accent" target="_blank">进入小工具</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand"><h3>阳安科技</h3><p>智慧连接 · 安心购物</p><p style="margin-top:12px;">致力于打造一站式数字化服务平台，提供即时通讯、在线商城、云应用及AI智能聊天等全方位产品。</p></div>
+            <div class="footer-col"><h4>产品服务</h4><ul><li><a href="https://yangan.top" target="_blank">阳安云聊</a></li><li><a href="https://shop.yangan.top" target="_blank">阳安商城</a></li><li></li><li><a href="https://chat.yangan.top" target="_blank">小工具</a></li></ul></div>
+            <div class="footer-col"><h4>快速导航</h4><ul><li><a href="official-about.html">关于我们</a></li><li><a href="official-products.html">产品服务</a></li><li><a href="official-articles.html">文章解读</a></li><li><a href="official-download.html">下载中心</a></li><li><a href="official-contact.html">联系我们</a></li></ul></div>
+            <div class="footer-col"><h4>支持平台</h4><ul><li><a href="../download/yanganchat.exe">Windows 客户端</a></li><li><a href="../download/yanganonline.apk">Android 客户端</a></li><li><a href="https://yangan.top" target="_blank">Web / iOS 端</a></li></ul></div>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; 2022-2026 阳安科技 版权所有</span>
+            <span><a href="https://yangan.top">yangan.top</a> | <a href="https://shop.yangan.top">shop.yangan.top</a> | <a href="https://chat.yangan.top">chat.yanga.top</a></span>
+        </div>
+    </div>
+</footer>
+<button class="back-to-top" id="backToTop" aria-label="返回顶部">↑</button>
+
+<script src="official.js"></script>
+<script>
+// 加载商城商品
+(async function() {
+    try {
+        const res = await fetch('../shop2/api/products.php?action=list');
+        const data = await res.json();
+        const grid = document.getElementById('shopGrid');
+        if (data && data.status === 'ok' && data.products.length > 0) {
+            grid.innerHTML = data.products.slice(0, 8).map(p => `
+                <div class="shop-card" onclick="location.href='https://shop.yangan.top'">
+                    <div class="thumb">${p.image_url ? `<img src="${p.image_url}" alt="${htmlEscape(p.name)}">` : '📦'}</div>
+                    <div class="body"><div class="name">${htmlEscape(p.name)}</div><div class="price">¥${parseFloat(p.price).toFixed(2)}</div></div>
+                </div>
+            `).join('');
+        } else {
+            grid.innerHTML = '<div class="empty-state"><div class="empty-icon">📦</div><p>暂无商品</p></div>';
+        }
+    } catch(e) {
+        document.getElementById('shopGrid').innerHTML = '<div class="empty-state"><div class="empty-icon">📦</div><p>加载失败</p></div>';
+    }
+})();
+</script>
+</body>
+</html>

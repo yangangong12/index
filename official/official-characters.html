@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人物介绍 - 阳安科技</title>
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="stylesheet" href="official.css">
+    <style>
+        .characters-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+        .character-card {
+            background: #fff; border-radius: var(--radius); overflow: hidden;
+            box-shadow: var(--shadow); transition: all var(--transition); cursor: pointer;
+            display: flex; flex-direction: column;
+        }
+        .character-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+        .character-card .avatar {
+            height: 260px; overflow: hidden; position: relative;
+        }
+        .character-card .avatar img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+        .character-card:hover .avatar img { transform: scale(1.06); }
+        .character-card .avatar .avatar-mask {
+            position: absolute; inset: 0;
+            background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.55));
+        }
+        .character-card .avatar .role-tag {
+            position: absolute; top: 14px; left: 14px;
+            background: rgba(255,255,255,0.92); color: var(--primary-dark);
+            font-size: 0.75rem; font-weight: 700; padding: 5px 12px;
+            border-radius: 50px; box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+        }
+        .character-card .avatar .char-name {
+            position: absolute; bottom: 14px; left: 18px; right: 18px;
+            color: #fff; font-size: 1.15rem; font-weight: 700;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+        }
+        .character-card .char-body { padding: 18px 20px 22px; display: flex; flex-direction: column; flex: 1; }
+        .character-card .char-title { font-size: 0.85rem; font-weight: 700; color: var(--primary); margin-bottom: 8px; }
+        .character-card .char-desc {
+            font-size: 0.85rem; color: var(--text-light); line-height: 1.7; flex: 1;
+            display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+        }
+        .character-card .char-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+        .character-card .char-tags span {
+            font-size: 0.72rem; color: var(--text-light);
+            background: var(--primary-bg); border-radius: 50px; padding: 3px 10px;
+        }
+        .character-card .char-link {
+            margin-top: 16px; font-size: 0.85rem; font-weight: 600; color: var(--primary);
+            display: inline-flex; align-items: center; gap: 4px; transition: gap var(--transition);
+        }
+        .character-card:hover .char-link { gap: 8px; }
+        @media (max-width: 1024px) { .characters-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 600px) { .characters-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="navbar">
+    <div class="container">
+        <a href="official.html" class="nav-logo"><div class="logo-icon"><img src="../favicon.ico"></div>沈阳阳安信息科技技术有限公司</a>
+        <div class="nav-links" id="navLinks">
+            <a href="official.html">首页</a>
+            <a href="official-products.html">产品服务</a>
+            <a href="official-articles.html">文章发布</a>
+            <a href="official-characters.html" class="active">人物介绍</a>
+            <a href="official-download.html">下载中心</a>
+            <a href="official-about.html">关于我们</a>
+            <a href="official-contact.html">联系我们</a>
+        </div>
+        <div class="nav-cta">
+            <a href="https://shop.yangan.top" class="btn btn-outline btn-sm" target="_blank">阳安云聊商城</a>
+            <a href="https://chat.yangan.top" class="btn btn-primary btn-sm" target="_blank">阳安小工具</a>
+        </div>
+        <button class="hamburger" id="hamburger" aria-label="菜单"><span></span><span></span><span></span></button>
+    </div>
+</nav>
+<div class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-inner">
+        <a href="official.html" class="mobile-nav-item"><span class="icon">🏠</span><span>首页</span></a>
+        <a href="official-products.html" class="mobile-nav-item"><span class="icon">📦</span><span>产品</span></a>
+        <a href="official-articles.html" class="mobile-nav-item"><span class="icon">📰</span><span>文章</span></a>
+        <a href="official-characters.html" class="mobile-nav-item active"><span class="icon">👥</span><span>人物</span></a>
+        <a href="official-download.html" class="mobile-nav-item"><span class="icon">📥</span><span>下载</span></a>
+    </div>
+</div>
+
+<div class="page-header">
+    <div class="container">
+        <div class="page-tag">人物介绍</div>
+        <h1>认识阳安团队成员</h1>
+        <p>每一位成员都是阳安科技的宝贵财富，他们用专业与热情推动产品不断向前</p>
+    </div>
+</div>
+
+<section class="section" style="padding-top:48px;">
+    <div class="container">
+        <div class="characters-grid">
+            <!-- 人物卡片：复制此卡片结构可继续添加人物，头像替换为 images/characters/ 下的图片 -->
+            <a href="character-01.html" class="character-card fade-in">
+                <div class="avatar">
+                    <img src="images/characters/tech-director.jpg" alt="张明远">
+                    <span class="role-tag">核心团队</span>
+                    <div class="avatar-mask"></div>
+                    <div class="char-name">张明远</div>
+                </div>
+                <div class="char-body">
+                    <div class="char-title">技术总监</div>
+                    <div class="char-desc">负责公司整体技术架构与 AI 引擎研发，带领团队打造阳安云聊、阳安商城等核心产品的底层能力。</div>
+                    <div class="char-tags"><span>技术架构</span><span>AI 研发</span><span>团队管理</span></div>
+                    <span class="char-link">查看详情 →</span>
+                </div>
+            </a>
+
+            <a href="character-02.html" class="character-card fade-in">
+                <div class="avatar">
+                    <img src="images/characters/product-manager.jpg" alt="李思雨">
+                    <span class="role-tag">核心团队</span>
+                    <div class="avatar-mask"></div>
+                    <div class="char-name">李思雨</div>
+                </div>
+                <div class="char-body">
+                    <div class="char-title">产品经理</div>
+                    <div class="char-desc">主导阳安云聊与阳安商城的产品设计与迭代，坚持以用户为中心，让每一个功能都简单好用。</div>
+                    <div class="char-tags"><span>产品设计</span><span>用户体验</span><span>数据分析</span></div>
+                    <span class="char-link">查看详情 →</span>
+                </div>
+            </a>
+
+            <a href="character-03.html" class="character-card fade-in">
+                <div class="avatar">
+                    <img src="images/characters/ops-lead.jpg" alt="王浩然">
+                    <span class="role-tag">核心团队</span>
+                    <div class="avatar-mask"></div>
+                    <div class="char-name">王浩然</div>
+                </div>
+                <div class="char-body">
+                    <div class="char-title">运营负责人</div>
+                    <div class="char-desc">负责品牌运营与用户增长策略，通过内容营销与社群运营，让更多用户了解并信赖阳安科技。</div>
+                    <div class="char-tags"><span>品牌运营</span><span>用户增长</span><span>内容营销</span></div>
+                    <span class="char-link">查看详情 →</span>
+                </div>
+            </a>
+
+            <a href="character-04.html" class="character-card fade-in">
+                <div class="avatar">
+                    <img src="images/characters/service-supervisor.jpg" alt="陈晓彤">
+                    <span class="role-tag">核心团队</span>
+                    <div class="avatar-mask"></div>
+                    <div class="char-name">陈晓彤</div>
+                </div>
+                <div class="char-body">
+                    <div class="char-title">客服主管</div>
+                    <div class="char-desc">搭建并管理客户服务体系，坚持 7×24 小时贴心响应，用心解决每一位用户的疑问与需求。</div>
+                    <div class="char-tags"><span>客户服务</span><span>团队培训</span><span>售后保障</span></div>
+                    <span class="char-link">查看详情 →</span>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand"><h3>阳安科技</h3><p>智慧连接 · 安心购物</p><p style="margin-top:12px;">致力于打造一站式数字化服务平台，提供即时通讯、在线商城、云应用及AI智能聊天等全方位产品。</p></div>
+            <div class="footer-col"><h4>产品服务</h4><ul><li><a href="https://yangan.top" target="_blank">阳安云聊</a></li><li><a href="https://shop.yangan.top" target="_blank">阳安商城</a></li><li></li><li><a href="https://chat.yangan.top" target="_blank">小工具</a></li></ul></div>
+            <div class="footer-col"><h4>快速导航</h4><ul><li><a href="official-about.html">关于我们</a></li><li><a href="official-products.html">产品服务</a></li><li><a href="official-articles.html">文章解读</a></li><li><a href="official-characters.html">人物介绍</a></li><li><a href="official-download.html">下载中心</a></li><li><a href="official-contact.html">联系我们</a></li></ul></div>
+            <div class="footer-col"><h4>支持平台</h4><ul><li><a href="../download/yanganchat.exe">Windows 客户端</a></li><li><a href="../download/yanganonline.apk">Android 客户端</a></li><li><a href="https://yangan.top" target="_blank">Web / iOS 端</a></li></ul></div>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; 2022-2026 阳安科技 版权所有</span>
+            <span><a href="https://yangan.top">yangan.top</a> | <a href="https://shop.yangan.top">shop.yangan.top</a> | <a href="https://chat.yangan.top">chat.yanga.top</a></span>
+        </div>
+    </div>
+</footer>
+<button class="back-to-top" id="backToTop" aria-label="返回顶部">↑</button>
+
+<script src="official.js"></script>
+</body>
+</html>

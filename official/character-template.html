@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- ★模板说明：复制本文件为 character-xx.html，按下方「★ 替换」注释修改对应内容即可生成新的人物页面 ★ -->
+    <title>人物姓名 - 人物详情 - 阳安科技</title>
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="stylesheet" href="official.css">
+    <style>
+        /* 详情页专用样式 */
+        .char-hero {
+            background: linear-gradient(135deg, var(--primary-darker) 0%, var(--primary-dark) 60%, var(--primary) 100%);
+            color: #fff; padding: 110px 0 56px; margin-top: var(--nav-height);
+        }
+        .char-hero-inner { display: flex; align-items: center; gap: 40px; flex-wrap: wrap; }
+        .char-avatar {
+            width: 180px; height: 180px; border-radius: 50%; overflow: hidden; flex-shrink: 0;
+            border: 4px solid rgba(255,255,255,0.35); box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+        }
+        .char-avatar img { width: 100%; height: 100%; object-fit: cover; }
+        .char-hero-info { flex: 1; min-width: 260px; }
+        .char-hero-info .char-tag {
+            display: inline-block; padding: 5px 14px; margin-bottom: 12px;
+            background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 50px; font-size: 0.8rem; font-weight: 600;
+        }
+        .char-hero-info h1 { font-size: 2.4rem; font-weight: 800; margin-bottom: 8px; }
+        .char-hero-info .char-role { font-size: 1.1rem; color: var(--accent-light); font-weight: 600; margin-bottom: 12px; }
+        .char-hero-info .char-slogan { font-size: 0.95rem; opacity: 0.85; max-width: 560px; }
+        .char-hero-info .char-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+        .char-hero-info .char-tags span {
+            font-size: 0.78rem; background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.2); border-radius: 50px; padding: 4px 12px;
+        }
+        /* 信息栏 */
+        .char-facts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: -34px; position: relative; z-index: 2; }
+        .char-fact { background: #fff; border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow-lg); text-align: center; }
+        .char-fact .fact-label { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 4px; }
+        .char-fact .fact-value { font-size: 0.95rem; font-weight: 700; color: var(--text); }
+        /* 内容区 */
+        .char-section { background: #fff; border-radius: var(--radius); padding: 32px; box-shadow: var(--shadow); margin-bottom: 24px; }
+        .char-section h2 { font-size: 1.25rem; font-weight: 700; margin-bottom: 18px; padding-left: 14px; border-left: 4px solid var(--primary); }
+        .char-section p { color: var(--text-light); line-height: 1.9; margin-bottom: 14px; }
+        .char-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        .char-skill { display: flex; gap: 12px; align-items: flex-start; padding: 14px 16px; background: var(--bg); border-radius: var(--radius-sm); }
+        .char-skill .sk-ico { font-size: 1.3rem; }
+        .char-skill .sk-name { font-weight: 700; font-size: 0.92rem; }
+        .char-skill .sk-desc { font-size: 0.82rem; color: var(--text-light); line-height: 1.6; }
+        .char-honor { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px dashed var(--border); }
+        .char-honor:last-child { border-bottom: none; }
+        .char-honor .h-ico { font-size: 1.2rem; }
+        .char-honor .h-text { font-size: 0.92rem; }
+        .char-honor .h-year { margin-left: auto; font-size: 0.8rem; color: var(--text-muted); white-space: nowrap; }
+        /* 页脚导航 */
+        .char-back { text-align: center; margin: 8px 0 40px; }
+        .char-pager { display: flex; justify-content: space-between; gap: 16px; margin-top: 28px; }
+        .char-pager a { flex: 1; background: #fff; border-radius: var(--radius); padding: 18px 24px; box-shadow: var(--shadow); transition: all var(--transition); }
+        .char-pager a:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
+        .char-pager a .p-label { font-size: 0.75rem; color: var(--text-muted); }
+        .char-pager a .p-name { font-weight: 700; margin-top: 4px; }
+        .char-pager a.next { text-align: right; }
+        @media (max-width: 768px) {
+            .char-hero-inner { justify-content: center; text-align: center; gap: 24px; }
+            .char-hero-info .char-slogan { margin: 0 auto; }
+            .char-facts { grid-template-columns: repeat(2, 1fr); }
+            .char-cols { grid-template-columns: 1fr; }
+            .char-section { padding: 22px; }
+            .char-hero-info h1 { font-size: 1.9rem; }
+        }
+        @media (max-width: 480px) { .char-facts { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="navbar">
+    <div class="container">
+        <a href="official.html" class="nav-logo"><div class="logo-icon"><img src="../favicon.ico"></div>沈阳阳安信息科技技术有限公司</a>
+        <div class="nav-links" id="navLinks">
+            <a href="official.html">首页</a>
+            <a href="official-products.html">产品服务</a>
+            <a href="official-articles.html">文章发布</a>
+            <a href="official-characters.html" class="active">人物介绍</a>
+            <a href="official-download.html">下载中心</a>
+            <a href="official-about.html">关于我们</a>
+            <a href="official-contact.html">联系我们</a>
+        </div>
+        <div class="nav-cta">
+            <a href="https://shop.yangan.top" class="btn btn-outline btn-sm" target="_blank">阳安云聊商城</a>
+            <a href="https://chat.yangan.top" class="btn btn-primary btn-sm" target="_blank">阳安小工具</a>
+        </div>
+        <button class="hamburger" id="hamburger" aria-label="菜单"><span></span><span></span><span></span></button>
+    </div>
+</nav>
+<div class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-inner">
+        <a href="official.html" class="mobile-nav-item"><span class="icon">🏠</span><span>首页</span></a>
+        <a href="official-products.html" class="mobile-nav-item"><span class="icon">📦</span><span>产品</span></a>
+        <a href="official-articles.html" class="mobile-nav-item"><span class="icon">📰</span><span>文章</span></a>
+        <a href="official-characters.html" class="mobile-nav-item active"><span class="icon">👥</span><span>人物</span></a>
+        <a href="official-download.html" class="mobile-nav-item"><span class="icon">📥</span><span>下载</span></a>
+    </div>
+</div>
+
+<!-- ★ 人物头部：替换头像图片、姓名、称号、标签等 ★ -->
+<section class="char-hero">
+    <div class="container">
+        <div class="char-hero-inner">
+            <div class="char-avatar">
+                <img src="images/characters/tech-director.jpg" alt="人物头像"><!-- ★ 替换：人物头像图片路径 ★ -->
+            </div>
+            <div class="char-hero-info">
+                <span class="char-tag">阳安科技 · 核心成员</span><!-- ★ 可选：所属团队/分组 ★ -->
+                <h1>人物姓名</h1><!-- ★ 替换：人物姓名 ★ -->
+                <div class="char-role">职位 / 头衔</div><!-- ★ 替换：职位头衔 ★ -->
+                <p class="char-slogan">一句话介绍，概括人物身份与特点，例如「十年技术深耕，用代码构建阳安的坚实底座」。</p><!-- ★ 替换：一句话简介 ★ -->
+                <div class="char-tags">
+                    <span>擅长标签 1</span><!-- ★ 替换：人物标签（可增删） ★ -->
+                    <span>擅长标签 2</span>
+                    <span>擅长标签 3</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section" style="padding-top:60px;">
+    <div class="container">
+
+        <!-- 基本信息栏 -->
+        <div class="char-facts">
+            <!-- ★ 替换：以下 4 项基本信息 ★ -->
+            <div class="char-fact"><div class="fact-label">所属部门</div><div class="fact-value">研发中心</div></div>
+            <div class="char-fact"><div class="fact-label">入职时间</div><div class="fact-value">2020 年</div></div>
+            <div class="char-fact"><div class="fact-label">联系方式</div><div class="fact-value">example@yangan.top</div></div>
+            <div class="char-fact"><div class="fact-label">工作地点</div><div class="fact-value">沈阳</div></div>
+        </div>
+
+        <!-- ★ 人物详细介绍 ★ -->
+        <div class="char-section">
+            <h2>人物介绍</h2>
+            <p>第一段：介绍人物的背景与经历，例如毕业院校、从业年限、加入阳安前的经历等。请用第三人称撰写，字数建议 80-120 字。</p>
+            <p>第二段：介绍人物在公司中的职责定位与代表性成果，例如主导了哪些项目、解决了哪些关键问题、带来了什么价值。</p>
+            <p>第三段（可选）：介绍人物的个人理念、工作风格或对未来工作的展望，让读者感受到人物的性格与温度。</p>
+        </div>
+
+        <!-- ★ 工作职责 / 擅长领域 ★ -->
+        <div class="char-section">
+            <h2>工作职责与擅长领域</h2>
+            <div class="char-cols">
+                <!-- ★ 替换：每项职责/领域（可增删，最多建议 6 项） ★ -->
+                <div class="char-skill"><div class="sk-ico">⚙️</div><div><div class="sk-name">职责 / 领域一</div><div class="sk-desc">一句话说明内容，如负责的具体方向或产出。</div></div></div>
+                <div class="char-skill"><div class="sk-ico">📊</div><div><div class="sk-name">职责 / 领域二</div><div class="sk-desc">一句话说明内容，如负责的具体方向或产出。</div></div></div>
+                <div class="char-skill"><div class="sk-ico">🤝</div><div><div class="sk-name">职责 / 领域三</div><div class="sk-desc">一句话说明内容，如负责的具体方向或产出。</div></div></div>
+                <div class="char-skill"><div class="sk-ico">🎯</div><div><div class="sk-name">职责 / 领域四</div><div class="sk-desc">一句话说明内容，如负责的具体方向或产出。</div></div></div>
+            </div>
+        </div>
+
+        <!-- ★ 荣誉奖项（可选区块，如不需要可删除整个 char-section） ★ -->
+        <div class="char-section">
+            <h2>荣誉与成就</h2>
+            <div class="char-honor"><div class="h-ico">🏆</div><div class="h-text">奖项名称或成就描述</div><div class="h-year">2024 年</div></div>
+            <div class="char-honor"><div class="h-ico">🥇</div><div class="h-text">奖项名称或成就描述</div><div class="h-year">2023 年</div></div>
+            <div class="char-honor"><div class="h-ico">🎖️</div><div class="h-text">奖项名称或成就描述</div><div class="h-year">2022 年</div></div>
+        </div>
+
+        <!-- 返回 & 上下页导航 -->
+        <div class="char-back">
+            <a href="official-characters.html" class="btn btn-primary">← 返回人物列表</a>
+        </div>
+        <div class="char-pager">
+            <!-- ★ 替换：上一个 / 下一个人物链接 ★ -->
+            <a href="character-xx.html"><div class="p-label">上一个</div><div class="p-name">上一个人物姓名</div></a>
+            <a href="character-xx.html" class="next"><div class="p-label">下一个</div><div class="p-name">下一个人物姓名</div></a>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand"><h3>阳安科技</h3><p>智慧连接 · 安心购物</p><p style="margin-top:12px;">致力于打造一站式数字化服务平台，提供即时通讯、在线商城、云应用及AI智能聊天等全方位产品。</p></div>
+            <div class="footer-col"><h4>产品服务</h4><ul><li><a href="https://yangan.top" target="_blank">阳安云聊</a></li><li><a href="https://shop.yangan.top" target="_blank">阳安商城</a></li><li></li><li><a href="https://chat.yangan.top" target="_blank">小工具</a></li></ul></div>
+            <div class="footer-col"><h4>快速导航</h4><ul><li><a href="official-about.html">关于我们</a></li><li><a href="official-products.html">产品服务</a></li><li><a href="official-articles.html">文章解读</a></li><li><a href="official-characters.html">人物介绍</a></li><li><a href="official-download.html">下载中心</a></li><li><a href="official-contact.html">联系我们</a></li></ul></div>
+            <div class="footer-col"><h4>支持平台</h4><ul><li><a href="../download/yanganchat.exe">Windows 客户端</a></li><li><a href="../download/yanganonline.apk">Android 客户端</a></li><li><a href="https://yangan.top" target="_blank">Web / iOS 端</a></li></ul></div>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; 2022-2026 阳安科技 版权所有</span>
+            <span><a href="https://yangan.top">yangan.top</a> | <a href="https://shop.yangan.top">shop.yangan.top</a> | <a href="https://chat.yangan.top">chat.yanga.top</a></span>
+        </div>
+    </div>
+</footer>
+<button class="back-to-top" id="backToTop" aria-label="返回顶部">↑</button>
+
+<script src="official.js"></script>
+</body>
+</html>

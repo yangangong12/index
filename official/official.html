@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="阳安科技 - 智慧连接，安心购物。阳安云聊、阳安商城、云应用、AI智能聊天，一站式数字化服务平台。">
+    <meta name="keywords" content="阳安科技,阳安云聊,阳安商城,云应用,AI聊天,智慧阳安">
+    <title>阳安科技 - 智慧连接 · 安心购物</title>
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+        <script src="https://tongji2.yangan.top/static/tracker.js"></script>
+    <link rel="stylesheet" href="official.css">
+    <style>
+        .hero {
+            min-height: 100vh; display: flex; align-items: center; position: relative; overflow: hidden;
+            background: linear-gradient(135deg, #0d47a1 0%, #1565c0 25%, #1e88e5 50%, #42a5f5 100%);
+            padding-top: var(--nav-height);
+        }
+        .hero::before {
+            content: ''; position: absolute; top: -50%; right: -20%;
+            width: 800px; height: 800px;
+            background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+            border-radius: 50%; animation: heroFloat 8s ease-in-out infinite;
+        }
+        .hero::after {
+            content: ''; position: absolute; bottom: -30%; left: -10%;
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+            border-radius: 50%; animation: heroFloat 10s ease-in-out infinite reverse;
+        }
+        @keyframes heroFloat { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(30px,-30px) scale(1.05)} }
+        .hero .container { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; width: 100%; }
+        .hero-content { color: #fff; }
+        .hero-badge { display: inline-block; padding: 6px 16px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); border-radius: 50px; font-size: 0.85rem; margin-bottom: 20px; backdrop-filter: blur(10px); }
+        .hero-title { font-size: 3.2rem; font-weight: 800; line-height: 1.2; margin-bottom: 16px; letter-spacing: -0.5px; }
+        .hero-title span { background: linear-gradient(135deg, #ffd54f, #ffa726); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .hero-desc { font-size: 1.15rem; opacity: 0.9; margin-bottom: 32px; max-width: 480px; line-height: 1.8; }
+        .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+        .hero-stats { display: flex; gap: 40px; margin-top: 40px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.15); }
+        .hero-stat { text-align: center; }
+        .hero-stat .num { font-size: 1.5rem; font-weight: 700; }
+        .hero-stat .label { font-size: 0.8rem; opacity: 0.7; margin-top: 2px; }
+        .hero-visual { display: flex; align-items: center; justify-content: center; }
+        .hero-card { background: rgba(255,255,255,0.1); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.2); border-radius: 24px; padding: 40px; width: 100%; max-width: 420px; box-shadow: 0 20px 60px rgba(0,0,0,0.2); }
+        .hero-card .app-preview { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        .hero-card .app-icon { aspect-ratio: 1; background: rgba(255,255,255,0.15); border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; font-size: 2rem; color: #fff; transition: all var(--transition); cursor: pointer; text-decoration: none; }
+        .hero-card .app-icon:hover { background: rgba(255,255,255,0.25); transform: translateY(-4px); }
+        .hero-card .app-icon span { font-size: 0.75rem; font-weight: 500; opacity: 0.85; }
+        .scroll-indicator { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; color: rgba(255,255,255,0.5); font-size: 0.8rem; animation: bounce 2s infinite; }
+        .scroll-indicator .mouse { width: 24px; height: 38px; border: 2px solid rgba(255,255,255,0.4); border-radius: 12px; position: relative; }
+        .scroll-indicator .mouse::after { content: ''; width: 4px; height: 8px; background: rgba(255,255,255,0.6); border-radius: 2px; position: absolute; top: 6px; left: 50%; transform: translateX(-50%); animation: scrollWheel 1.5s infinite; }
+        @keyframes scrollWheel { 0%{opacity:1;top:6px} 100%{opacity:0;top:20px} }
+        @keyframes bounce { 0%,20%,50%,80%,100%{transform:translateX(-50%) translateY(0)} 40%{transform:translateX(-50%) translateY(-10px)} 60%{transform:translateX(-50%) translateY(-5px)} }
+
+        /* 产品卡片 */
+        .products-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+        .product-card { background: #fff; border-radius: var(--radius); padding: 36px 24px; text-align: center; box-shadow: var(--shadow); transition: all var(--transition); border: 1px solid transparent; position: relative; overflow: hidden; cursor: pointer; }
+        .product-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--primary), var(--primary-light)); opacity: 0; transition: opacity var(--transition); }
+        .product-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); border-color: var(--primary-bg); }
+        .product-card:hover::before { opacity: 1; }
+        .product-card .icon-wrap { width: 72px; height: 72px; background: var(--primary-bg); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 2rem; transition: all var(--transition); }
+        .product-card:hover .icon-wrap { background: var(--primary); transform: scale(1.1); }
+        .product-card h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; }
+        .product-card p { font-size: 0.9rem; color: var(--text-light); line-height: 1.6; margin-bottom: 16px; }
+        .product-card .link { color: var(--primary); font-weight: 600; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 4px; transition: gap var(--transition); }
+        .product-card:hover .link { gap: 8px; }
+
+        /* 推荐区 */
+        .recommend-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+        .recommend-col h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+        .recommend-list { display: flex; flex-direction: column; gap: 12px; }
+        .recommend-item { background: #fff; border-radius: var(--radius-sm); padding: 16px 20px; box-shadow: var(--shadow); cursor: pointer; transition: all var(--transition); display: flex; align-items: center; justify-content: space-between; }
+        .recommend-item:hover { transform: translateX(4px); box-shadow: var(--shadow-lg); }
+        .recommend-item .info h4 { font-size: 0.95rem; font-weight: 600; }
+        .recommend-item .info p { font-size: 0.8rem; color: var(--text-muted); margin-top: 2px; }
+        .recommend-item .arrow { color: var(--primary); font-weight: 600; }
+        .recommend-more { text-align: center; margin-top: 16px; }
+
+        /* 下载区 */
+        .download-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .download-card { background: rgba(255,255,255,0.08); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.15); border-radius: var(--radius); padding: 36px 24px; text-align: center; transition: all var(--transition); color: #fff; }
+        .download-card:hover { background: rgba(255,255,255,0.15); transform: translateY(-4px); }
+        .download-card .platform-icon { font-size: 3rem; margin-bottom: 16px; }
+        .download-card h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; }
+        .download-card p { font-size: 0.85rem; opacity: 0.7; margin-bottom: 20px; }
+        .download-card .btn { margin: 0 auto; }
+
+        /* 联系 */
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
+        .contact-info h3 { font-size: 1.8rem; font-weight: 700; margin-bottom: 16px; }
+        .contact-info > p { color: var(--text-light); margin-bottom: 32px; font-size: 1.05rem; }
+        .contact-list { display: flex; flex-direction: column; gap: 20px; }
+        .contact-list li { display: flex; align-items: center; gap: 14px; }
+        .contact-list .icon { width: 44px; height: 44px; background: var(--primary-bg); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+        .contact-list .info h4 { font-size: 0.9rem; font-weight: 600; }
+        .contact-list .info p { font-size: 0.85rem; color: var(--text-light); }
+        .qr-card { background: #fff; border-radius: var(--radius); padding: 32px; box-shadow: var(--shadow-lg); max-width: 320px; margin: 0 auto; text-align: center; }
+        .qr-card .qr-placeholder { width: 180px; height: 180px; background: var(--bg); border-radius: var(--radius-sm); margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; font-size: 5rem; }
+        .qr-card h4 { font-size: 1.1rem; font-weight: 700; margin-bottom: 4px; }
+        .qr-card p { font-size: 0.85rem; color: var(--text-light); }
+
+        @media (max-width: 1024px) {
+            .hero .container { grid-template-columns: 1fr; text-align: center; }
+            .hero-content { order: 1; } .hero-visual { order: 2; }
+            .hero-desc { margin: 0 auto 32px; }
+            .hero-actions { justify-content: center; }
+            .hero-stats { justify-content: center; }
+            .hero-card { margin: 0 auto; }
+            .scroll-indicator { display: none; }
+            .products-grid { grid-template-columns: repeat(2, 1fr); }
+            .recommend-grid { grid-template-columns: 1fr; }
+            .download-grid { grid-template-columns: repeat(2, 1fr); }
+            .contact-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+            .hero { min-height: auto; padding: 100px 0 60px; }
+            .hero-title { font-size: 2rem; }
+            .hero-desc { font-size: 1rem; }
+            .hero-stats { gap: 24px; flex-wrap: wrap; }
+            .hero-card { padding: 24px; }
+            .hero-card .app-preview { gap: 8px; }
+            .hero-card .app-icon { font-size: 1.5rem; border-radius: 12px; }
+            .hero-card .app-icon span { font-size: 0.65rem; }
+            .products-grid { grid-template-columns: 1fr; gap: 16px; }
+            .download-grid { grid-template-columns: 1fr; gap: 16px; }
+        }
+        @media (max-width: 480px) {
+            .hero-title { font-size: 1.7rem; }
+            .hero-actions { flex-direction: column; }
+            .hero-actions .btn { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="navbar">
+    <div class="container">
+        <a href="official.html" class="nav-logo"><div class="logo-icon"><img src="../favicon.ico"></div>沈阳阳安信息科技技术有限公司</a>
+        <div class="nav-links" id="navLinks">
+            <a href="official.html" class="active">首页</a>
+            <a href="official-products.html">产品服务</a>
+            <a href="official-articles.html">文章发布</a>
+            <a href="official-download.html">下载中心</a>
+            <a href="official-about.html">关于我们</a>
+            <a href="official-contact.html">联系我们</a>
+        </div>
+        <div class="nav-cta">
+            <a href="https://shop.yangan.top" class="btn btn-outline btn-sm" target="_blank">阳安云聊商城</a>
+            <a href="https://chat.yangan.top" class="btn btn-primary btn-sm" target="_blank">阳安小工具</a>
+        </div>
+        <button class="hamburger" id="hamburger" aria-label="菜单"><span></span><span></span><span></span></button>
+    </div>
+</nav>
+<div class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-inner">
+        <a href="official.html" class="mobile-nav-item active"><span class="icon">🏠</span><span>首页</span></a>
+        <a href="official-products.html" class="mobile-nav-item"><span class="icon">📦</span><span>产品</span></a>
+        <a href="official-articles.html" class="mobile-nav-item"><span class="icon">📰</span><span>文章</span></a>
+        <a href="official-download.html" class="mobile-nav-item"><span class="icon">📥</span><span>下载</span></a>
+    </div>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+    <div class="container">
+        <div class="hero-content fade-in">
+            <div class="hero-badge">阳安科技 · 信息创造价值，阳安引领未来</div>
+            <h1 class="hero-title"></span></h1>
+            <p class="hero-desc">阳安科技致力于打造一站式数字化服务平台，提供即时通讯、在线商城、云应用聊天等全方位产品。</p>
+            <div class="hero-actions">
+                <a href="official-products.html" class="btn btn-white btn-lg">探索产品</a>
+                <a href="official-download.html" class="btn btn-lg" style="background:rgba(255,255,255,0.15);color:#fff;border:1px solid rgba(255,255,255,0.3);">下载应用</a>
+            </div>
+            <div class="hero-stats">
+                <div class="hero-stat"><div class="num">1829+</div><div class="label">活跃用户</div></div>
+                <div class="hero-stat"><div class="num">5</div><div class="label">核心产品</div></div>
+                <div class="hero-stat"><div class="num">3+</div><div class="label">支持平台</div></div>
+            </div>
+        </div>
+        <div class="hero-visual fade-in">
+            <div class="hero-card">
+                <div class="app-preview">
+                    <a href="https://yangan.top" class="app-icon" target="_blank">💬<span>阳安云聊</span></a>
+                    <a href="https://shop.yangan.top" class="app-icon" target="_blank">🛒<span>阳安商城</span></a>
+                    <a href="https://chat.yangan.top" class="app-icon" target="_blank">🤖<span>阳安科技小工具</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="scroll-indicator"><div class="mouse"></div>向下滚动探索</div>
+</section>
+
+<!-- 产品服务 -->
+<section class="section" id="products">
+    <div class="container">
+        <div class="section-header fade-in">
+            <div class="section-tag">产品服务</div>
+            <h2 class="section-title">全方位数字化产品矩阵</h2>
+            <p class="section-desc">覆盖即时通讯、电子商务、云应用、AI智能四大领域</p>
+        </div>
+        <div class="products-grid">
+            <a href="official-products.html#chat" class="product-card fade-in"><div class="icon-wrap">💬</div><h3>阳安云聊</h3><p>智能即时通讯平台，支持文字、图片、文件传输，群聊与私聊，红包与转账。</p><span class="link">了解更多 →</span></a>
+            <a href="official-products.html#shop" class="product-card fade-in"><div class="icon-wrap">🛒</div><h3>阳安商城</h3><p>全品类在线购物平台，商品浏览、购物车、订单管理、优惠券系统。</p><span class="link">了解更多 →</span></a>
+            <a href="official-products.html#ai" class="product-card fade-in"><div class="icon-wrap">🤖</div><h3>云工具</h3><p>基于先进AI技术的智能对话助手，多轮对话、知识问答、内容创作。</p><span class="link">了解更多 →</span></a>
+        </div>
+    </div>
+</section>
+
+<!-- 推荐：文章 + 商品 -->
+<section class="section bg-white" id="recommend">
+    <div class="container">
+        <div class="recommend-grid">
+            <!-- 最新文章 -->
+            <div class="recommend-col fade-in">
+                <h3>📰 最新解读</h3>
+                <div class="recommend-list" id="articleList">
+                    <div class="loading-wrap"><div class="loading-spinner"></div>加载中...</div>
+                </div>
+                <div class="recommend-more"><a href="official-articles.html" class="btn btn-outline">查看全部文章 →</a></div>
+            </div>
+            <!-- 热门商品 -->
+            <div class="recommend-col fade-in">
+                <h3>🛒 商城推荐</h3>
+                <div class="recommend-list" id="productList">
+                    <div class="loading-wrap"><div class="loading-spinner"></div>加载中...</div>
+                </div>
+                <div class="recommend-more"><a href="https://shop.yangan.top" class="btn btn-outline" target="_blank">前往商城 →</a></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 核心优势 -->
+<section class="section" id="features">
+    <div class="container">
+        <div class="section-header fade-in">
+            <div class="section-tag">核心优势</div>
+            <h2 class="section-title">为什么选择阳安科技</h2>
+            <p class="section-desc">以技术创新为驱动，以用户体验为核心</p>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;">
+            <div class="card fade-in" style="padding:32px 24px;"><div style="width:56px;height:56px;background:var(--primary-bg);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:16px;">🔐</div><h3 style="margin-bottom:8px;">数据安全保障</h3><p style="color:var(--text-light);font-size:0.9rem;">采用先进的加密技术，全方位保护用户数据安全与隐私。</p></div>
+            <div class="card fade-in" style="padding:32px 24px;"><div style="width:56px;height:56px;background:var(--primary-bg);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:16px;">📱</div><h3 style="margin-bottom:8px;">多平台覆盖</h3><p style="color:var(--text-light);font-size:0.9rem;">支持Windows、Android、iOS及Web端，随时随地畅享服务。</p></div>
+            <div class="card fade-in" style="padding:32px 24px;"><div style="width:56px;height:56px;background:var(--primary-bg);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:16px;">⚡</div><h3 style="margin-bottom:8px;">高性能体验</h3><p style="color:var(--text-light);font-size:0.9rem;">优化的系统架构，低延迟通讯，快速响应。</p></div>
+            <div class="card fade-in" style="padding:32px 24px;"><div style="width:56px;height:56px;background:var(--primary-bg);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:16px;">🎯</div><h3 style="margin-bottom:8px;">一站式服务</h3><p style="color:var(--text-light);font-size:0.9rem;">聊天、购物、应用、AI助手，一个平台满足所有需求。</p></div>
+            <div class="card fade-in" style="padding:32px 24px;"><div style="width:56px;height:56px;background:var(--primary-bg);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:16px;">🔄</div><h3 style="margin-bottom:8px;">持续迭代更新</h3><p style="color:var(--text-light);font-size:0.9rem;">产品团队持续优化功能，定期推出新特性。</p></div>
+            <div class="card fade-in" style="padding:32px 24px;"><div style="width:56px;height:56px;background:var(--primary-bg);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:16px;">💝</div><h3 style="margin-bottom:8px;">贴心用户服务</h3><p style="color:var(--text-light);font-size:0.9rem;">专业客服团队，快速响应用户需求。</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- 数据统计 -->
+<section class="section" style="padding:60px 0;">
+    <div class="container">
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center;">
+            <div class="fade-in" style="padding:32px 16px;"><div class="num" data-count="1829" style="font-size:3rem;font-weight:800;color:var(--primary);line-height:1;">0</div><div style="color:var(--text-light);">累计注册用户</div></div>
+            <div class="fade-in" style="padding:32px 16px;"><div class="num" data-count="5" style="font-size:3rem;font-weight:800;color:var(--primary);line-height:1;">0</div><div style="color:var(--text-light);">核心产品线</div></div>
+            <div class="fade-in" style="padding:32px 16px;"><div class="num" data-count="3" style="font-size:3rem;font-weight:800;color:var(--primary);line-height:1;">0</div><div style="color:var(--text-light);">支持平台数</div></div>
+            <div class="fade-in" style="padding:32px 16px;"><div class="num" data-count="99.99" style="font-size:3rem;font-weight:800;color:var(--primary);line-height:1;">0</div><div style="color:var(--text-light);">服务可用率(%)</div></div>
+        </div>
+    </div>
+</section>
+
+<!-- 下载中心 -->
+<section class="section bg-primary" id="download">
+    <div class="container">
+        <div class="section-header fade-in">
+            <div class="section-tag">下载中心</div>
+            <h2 class="section-title">随时随地，即刻体验</h2>
+            <p class="section-desc">阳安云聊支持Windows、Android、iOS全平台</p>
+        </div>
+        <div class="download-grid">
+            <div class="download-card fade-in"><div class="platform-icon">🖥️</div><h3>Windows 客户端</h3><p>适用 Windows 10/11 系统</p><a href="../download/yanganchat.exe" class="btn btn-white">立即下载</a></div>
+            <div class="download-card fade-in"><div class="platform-icon">📱</div><h3>Android 客户端</h3><p>适用 Android 7.0 及以上</p><a href="../download/yanganonline.apk" class="btn btn-white">立即下载</a></div>
+            <div class="download-card fade-in"><div class="platform-icon">🍎</div><h3>iOS / Web 端</h3><p>Safari打开添加到主屏幕</p><a href="https://yangan.top" class="btn btn-white" target="_blank">访问Web版</a></div>
+        </div>
+    </div>
+</section>
+
+<!-- 联系我们 -->
+<section class="section bg-white" id="contact">
+    <div class="container">
+        <div class="section-header fade-in"><div class="section-tag">联系我们</div><h2 class="section-title">与阳安科技取得联系</h2><p class="section-desc">如有任何问题或合作意向，欢迎通过以下方式联系我们</p></div>
+        <div class="contact-grid">
+            <div class="contact-info fade-in">
+                <h3>联系方式</h3>
+                <p>我们期待与您的沟通交流，阳安科技将竭诚为您服务。</p>
+                <ul class="contact-list">
+                    <li><div class="icon">🌐</div><div class="info"><h4>官方网站</h4><p>https://yangan.top</p></div></li>
+                    <li><div class="icon">🛒</div><div class="info"><h4>官方商城</h4><p>https://shop.yangan.top</p></div></li>
+                    <li><div class="icon">📧</div><div class="info"><h4>电子邮箱</h4><p>yang@yangan.top</p></div></li>
+                    <li><div class="icon">💬</div><div class="info"><h4>微信公众号</h4><p>智慧阳安</p></div></li>
+                </ul>
+                <a href="official-contact.html" class="btn btn-outline" style="margin-top:20px;">更多联系方式 →</a>
+            </div>
+            <div class="fade-in" style="display:flex;align-items:center;justify-content:center;">
+                <div class="qr-card"><div class="qr-placeholder">📱</div><h4>关注微信公众号</h4><p>微信搜索「智慧阳安」</p><p style="margin-top:4px;font-size:0.8rem;color:var(--text-muted);">获取最新产品动态与服务资讯</p></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand"><h3>阳安科技</h3><p>智慧连接 · 安心购物</p><p style="margin-top:12px;">致力于打造一站式数字化服务平台，提供即时通讯、在线商城、云应用及AI智能聊天等全方位产品。</p></div>
+            <div class="footer-col"><h4>产品服务</h4><ul><li><a href="https://yangan.top" target="_blank">阳安云聊</a></li><li><a href="https://shop.yangan.top" target="_blank">阳安商城</a></li><li></li><li><a href="https://chat.yangan.top" target="_blank">小工具</a></li></ul></div>
+            <div class="footer-col"><h4>快速导航</h4><ul><li><a href="official-about.html">关于我们</a></li><li><a href="official-products.html">产品服务</a></li><li><a href="official-articles.html">文章解读</a></li><li><a href="official-download.html">下载中心</a></li><li><a href="official-contact.html">联系我们</a></li></ul></div>
+            <div class="footer-col"><h4>支持平台</h4><ul><li><a href="../download/yanganchat.exe">Windows 客户端</a></li><li><a href="../download/yanganonline.apk">Android 客户端</a></li><li><a href="https://yangan.top" target="_blank">Web / iOS 端</a></li></ul></div>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; 2022-2026 阳安科技 版权所有</span>
+            <span><a href="https://yangan.top">yangan.top</a> | <a href="https://shop.yangan.top">shop.yangan.top</a> | <a href="https://chat.yangan.top">chat.yanga.top</a></span>
+        </div>
+    </div>
+</footer>
+<button class="back-to-top" id="backToTop" aria-label="返回顶部">↑</button>
+
+<script src="official.js"></script>
+<script>
+// 加载推荐文章
+(async function() {
+    const articleList = document.getElementById('articleList');
+    const productList = document.getElementById('productList');
+
+    // 加载文章
+    try {
+        const res = await fetch('http://47.80.18.168/article/api.php?action=list&page=1');
+        const data = await res.json();
+        if (data && data.success && data.data.articles.length > 0) {
+            articleList.innerHTML = data.data.articles.slice(0, 5).map(a => `
+                <div class="recommend-item" onclick="location.href='../article/view.php?id=${a.id}'">
+                    <div class="info"><h4>${htmlEscape(a.title)}</h4><p>${fmtTime(a.created_at)} · ${a.view_count} 阅读</p></div>
+                    <span class="arrow">→</span>
+                </div>
+            `).join('');
+        } else {
+            articleList.innerHTML = '<div class="empty-state"><div class="empty-icon">📄</div><p>暂无文章</p></div>';
+        }
+    } catch(e) {
+        articleList.innerHTML = '<div class="empty-state"><div class="empty-icon">📄</div><p>加载失败</p></div>';
+    }
+
+    // 加载商品
+    try {
+        const res = await fetch('../shop2/api/products.php?action=list');
+        const data = await res.json();
+        if (data && data.status === 'ok' && data.products.length > 0) {
+            const items = data.products.sort(() => Math.random() - .5).slice(0, 5);
+            productList.innerHTML = items.map(p => `
+                <div class="recommend-item" onclick="location.href='https://shop.yangan.top'">
+                    <div class="info"><h4>${htmlEscape(p.name)}</h4><p>¥${parseFloat(p.price).toFixed(2)}</p></div>
+                    <span class="arrow">→</span>
+                </div>
+            `).join('');
+        } else {
+            productList.innerHTML = '<div class="empty-state"><div class="empty-icon">📦</div><p>暂无商品</p></div>';
+        }
+    } catch(e) {
+        productList.innerHTML = '<div class="empty-state"><div class="empty-icon">📦</div><p>加载失败</p></div>';
+    }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文章解读 - 阳安科技</title>
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="stylesheet" href="official.css">
+    <style>
+        .articles-layout { display: grid; grid-template-columns: 1fr 320px; gap: 40px; align-items: start; }
+        .articles-main { display: flex; flex-direction: column; gap: 20px; }
+        .article-card { background: #fff; border-radius: var(--radius); padding: 28px; box-shadow: var(--shadow); cursor: pointer; transition: all var(--transition); border-left: 4px solid transparent; }
+        .article-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-left-color: var(--primary); }
+        .article-card h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 10px; color: var(--text); line-height: 1.5; }
+        .article-card .excerpt { color: var(--text-light); font-size: 0.9rem; line-height: 1.7; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 14px; }
+        .article-card .meta { display: flex; align-items: center; gap: 16px; font-size: 0.8rem; color: var(--text-muted); flex-wrap: wrap; }
+        .article-card .meta span { display: flex; align-items: center; gap: 4px; }
+        .article-card .meta .author { color: var(--primary); font-weight: 500; }
+        .sidebar-card { background: #fff; border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); margin-bottom: 20px; }
+        .sidebar-card h4 { font-size: 1.05rem; font-weight: 700; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 2px solid var(--primary-bg); }
+        .sidebar-card .hot-item { padding: 10px 0; border-bottom: 1px solid #f5f5f5; cursor: pointer; transition: color var(--transition); display: flex; gap: 8px; align-items: flex-start; }
+        .sidebar-card .hot-item:hover { color: var(--primary); }
+        .sidebar-card .hot-item .rank { font-weight: 800; font-size: 1.1rem; color: var(--primary); min-width: 24px; }
+        .sidebar-card .hot-item .rank.gold { color: #f59e0b; }
+        .sidebar-card .hot-item:last-child { border-bottom: none; }
+        .pagination { display: flex; justify-content: center; gap: 8px; margin-top: 32px; }
+        .pagination button { padding: 8px 16px; border: 1px solid var(--border); background: #fff; border-radius: var(--radius-xs); cursor: pointer; transition: all var(--transition); font-size: 0.9rem; }
+        .pagination button:hover { border-color: var(--primary); color: var(--primary); }
+        .pagination button.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+        .pagination button:disabled { opacity: 0.4; cursor: not-allowed; }
+        @media (max-width: 768px) {
+            .articles-layout { grid-template-columns: 1fr; }
+            .article-card { padding: 20px; }
+            .pagination button { padding: 6px 12px; font-size: 0.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="navbar">
+    <div class="container">
+        <a href="official.html" class="nav-logo"><div class="logo-icon"><img src="../favicon.ico"></div>沈阳阳安信息科技技术有限公司</a>
+        <div class="nav-links" id="navLinks">
+            <a href="official.html" class="active">首页</a>
+            <a href="official-products.html">产品服务</a>
+            <a href="official-articles.html">文章发布</a>
+            <a href="official-download.html">下载中心</a>
+            <a href="official-about.html">关于我们</a>
+            <a href="official-contact.html">联系我们</a>
+        </div>
+        <div class="nav-cta">
+            <a href="https://shop.yangan.top" class="btn btn-outline btn-sm" target="_blank">阳安云聊商城</a>
+            <a href="https://chat.yangan.top" class="btn btn-primary btn-sm" target="_blank">阳安小工具</a>
+        </div>
+        <button class="hamburger" id="hamburger" aria-label="菜单"><span></span><span></span><span></span></button>
+    </div>
+</nav>
+<div class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-inner">
+        <a href="official.html" class="mobile-nav-item active"><span class="icon">🏠</span><span>首页</span></a>
+        <a href="official-products.html" class="mobile-nav-item"><span class="icon">📦</span><span>产品</span></a>
+        <a href="official-articles.html" class="mobile-nav-item"><span class="icon">📰</span><span>文章</span></a>
+        <a href="official-download.html" class="mobile-nav-item"><span class="icon">📥</span><span>下载</span></a>
+    </div>
+</div>
+
+
+<div class="page-header">
+    <div class="container">
+        <div class="page-tag">文章发布</div>
+        <h1>深度解读 · 知识分享</h1>
+        <p>阳安科技原创文章与解读，涵盖行业洞察、技术分享、产品动态等内容</p>
+    </div>
+</div>
+
+<section class="section" style="padding-top:40px;">
+    <div class="container">
+        <div class="articles-layout">
+            <div class="articles-main">
+                <div id="articlesList"><div class="loading-wrap"><div class="loading-spinner"></div>加载文章中...</div></div>
+                <div class="pagination" id="pagination"></div>
+            </div>
+            <aside class="fade-in">
+                <div class="sidebar-card">
+                    <h4>🔥 热门文章</h4>
+                    <div id="hotArticles"><div class="loading-wrap" style="padding:20px;"><div class="loading-spinner"></div></div></div>
+                </div>
+                <div class="sidebar-card">
+                    <h4>📊 文章统计</h4>
+                    <div style="text-align:center;padding:10px 0;">
+                        <div style="font-size:2rem;font-weight:800;color:var(--primary);" id="totalArticles">-</div>
+                        <div style="color:var(--text-muted);">累计文章数</div>
+                    </div>
+                </div>
+                <div class="sidebar-card">
+                    <h4>💬 微信公众号</h4>
+                    <div style="text-align:center;">
+                        <div style="width:120px;height:120px;background:var(--bg);border-radius:var(--radius-sm);margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:3rem;">📱</div>
+                        <p style="font-weight:600;">智慧阳安</p>
+                        <p style="font-size:0.8rem;color:var(--text-muted);">微信扫码关注获取最新文章</p>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand"><h3>阳安科技</h3><p>智慧连接 · 安心购物</p><p style="margin-top:12px;">致力于打造一站式数字化服务平台，提供即时通讯、在线商城、云应用及AI智能聊天等全方位产品。</p></div>
+            <div class="footer-col"><h4>产品服务</h4><ul><li><a href="https://yangan.top" target="_blank">阳安云聊</a></li><li><a href="https://shop.yangan.top" target="_blank">阳安商城</a></li><li></li><li><a href="https://chat.yangan.top" target="_blank">小工具</a></li></ul></div>
+            <div class="footer-col"><h4>快速导航</h4><ul><li><a href="official-about.html">关于我们</a></li><li><a href="official-products.html">产品服务</a></li><li><a href="official-articles.html">文章解读</a></li><li><a href="official-download.html">下载中心</a></li><li><a href="official-contact.html">联系我们</a></li></ul></div>
+            <div class="footer-col"><h4>支持平台</h4><ul><li><a href="../download/yanganchat.exe">Windows 客户端</a></li><li><a href="../download/yanganonline.apk">Android 客户端</a></li><li><a href="https://yangan.top" target="_blank">Web / iOS 端</a></li></ul></div>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; 2022-2026 阳安科技 版权所有</span>
+            <span><a href="https://yangan.top">yangan.top</a> | <a href="https://shop.yangan.top">shop.yangan.top</a> | <a href="https://chat.yangan.top">chat.yanga.top</a></span>
+        </div>
+    </div>
+</footer>
+<button class="back-to-top" id="backToTop" aria-label="返回顶部">↑</button>
+
+<script src="official.js"></script>
+<script>
+let currentPage = 1;
+let totalPages = 1;
+
+async function loadArticles(page = 1) {
+    currentPage = page;
+    const list = document.getElementById('articlesList');
+    list.innerHTML = '<div class="loading-wrap"><div class="loading-spinner"></div>加载中...</div>';
+    try {
+        const res = await fetch(`http://47.80.18.168/article/api.php?action=list&page=${page}`);
+        const data = await res.json();
+        if (data && data.success) {
+            const articles = data.data.articles;
+            totalPages = Math.ceil(data.data.total / data.data.limit);
+            document.getElementById('totalArticles').textContent = data.data.total;
+            if (articles.length === 0) {
+                list.innerHTML = '<div class="empty-state"><div class="empty-icon">📄</div><p>暂无文章</p></div>';
+            } else {
+                list.innerHTML = articles.map(a => `
+                    <div class="article-card" onclick="location.href='../article/view.php?id=${a.id}'">
+                        <h3>${htmlEscape(a.title)}</h3>
+                        <div class="excerpt">${htmlEscape((a.content || '').replace(/<[^>]*>/g, '').substring(0, 150))}</div>
+                        <div class="meta">
+                            <span class="author">👤 ${htmlEscape(a.author_name || '阳安科技')}</span>
+                            <span>📅 ${fmtDate(a.created_at)}</span>
+                            <span>👁️ ${a.view_count || 0} 阅读</span>
+                            <span>❤️ ${a.like_count || 0} 点赞</span>
+                            <span>💬 ${a.comment_count || 0} 评论</span>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            renderPagination();
+        } else {
+            list.innerHTML = '<div class="empty-state"><div class="empty-icon">📄</div><p>加载失败</p></div>';
+        }
+    } catch(e) {
+        list.innerHTML = '<div class="empty-state"><div class="empty-icon">📄</div><p>加载失败</p></div>';
+    }
+}
+
+function renderPagination() {
+    const p = document.getElementById('pagination');
+    if (totalPages <= 1) { p.innerHTML = ''; return; }
+    let html = `<button ${currentPage===1?'disabled':''} onclick="loadArticles(${currentPage-1})">上一页</button>`;
+    for (let i = 1; i <= totalPages; i++) {
+        html += `<button class="${i===currentPage?'active':''}" onclick="loadArticles(${i})">${i}</button>`;
+    }
+    html += `<button ${currentPage===totalPages?'disabled':''} onclick="loadArticles(${currentPage+1})">下一页</button>`;
+    p.innerHTML = html;
+}
+
+// 热门文章
+async function loadHotArticles() {
+    try {
+        const res = await fetch('http://47.80.18.168/article/api.php?action=list&page=1');
+        const data = await res.json();
+        const container = document.getElementById('hotArticles');
+        if (data && data.success && data.data.articles.length > 0) {
+            const sorted = [...data.data.articles].sort((a, b) => (b.view_count||0) - (a.view_count||0)).slice(0, 6);
+            container.innerHTML = sorted.map((a, i) => `
+                <div class="hot-item" onclick="location.href='../article/view.php?id=${a.id}'">
+                    <span class="rank ${i<3?'gold':''}">${i+1}</span>
+                    <span>${htmlEscape(a.title)}</span>
+                </div>
+            `).join('');
+        } else {
+            container.innerHTML = '<p style="color:var(--text-muted);font-size:0.9rem;">暂无文章</p>';
+        }
+    } catch(e) {}
+}
+
+loadArticles();
+loadHotArticles();
+</script>
+</body>
+</html>

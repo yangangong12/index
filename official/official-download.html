@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="阳安科技下载中心 - 下载阳安云聊Windows、Android、iOS客户端">
+    <title>下载中心 - 阳安科技</title>
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="stylesheet" href="official.css">
+    <style>
+        .download-hero { background: linear-gradient(135deg, #0d47a1, #1e88e5); padding: 60px 0 80px; color: #fff; text-align: center; }
+        .download-hero h1 { font-size: 2.8rem; font-weight: 800; margin-bottom: 12px; }
+        .download-hero p { font-size: 1.1rem; opacity: 0.85; max-width: 500px; margin: 0 auto; }
+        .platform-tabs { display: flex; justify-content: center; gap: 12px; margin: -36px 0 48px; flex-wrap: wrap; }
+        .platform-tab { padding: 12px 28px; background: #fff; border-radius: 50px; cursor: pointer; font-weight: 600; box-shadow: var(--shadow); transition: all var(--transition); border: 2px solid transparent; font-size: 0.95rem; }
+        .platform-tab:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+        .platform-tab.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+        .dl-panel { display: none; }
+        .dl-panel.active { display: block; }
+        .dl-panel-inner { background: #fff; border-radius: var(--radius); padding: 48px; box-shadow: var(--shadow-lg); display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+        .dl-panel-inner .dl-visual { text-align: center; }
+        .dl-panel-inner .dl-visual .dl-icon { font-size: 7rem; display: block; margin-bottom: 16px; }
+        .dl-panel-inner .dl-info h2 { font-size: 1.8rem; font-weight: 700; margin-bottom: 8px; }
+        .dl-panel-inner .dl-info .ver { display: inline-block; padding: 4px 12px; background: var(--primary-bg); color: var(--primary); border-radius: 50px; font-size: 0.85rem; font-weight: 600; margin-bottom: 16px; }
+        .dl-panel-inner .dl-info .desc { color: var(--text-light); font-size: 1rem; line-height: 1.8; margin-bottom: 20px; }
+        .dl-panel-inner .dl-info .dl-meta { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 24px; }
+        .dl-panel-inner .dl-info .dl-meta-item { display: flex; align-items: center; gap: 6px; font-size: 0.85rem; color: var(--text-light); }
+        .dl-panel-inner .dl-info .dl-meta-item .ico { font-size: 1.1rem; }
+        .dl-panel-inner .dl-info .dl-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+        .req-list { margin-top: 32px; }
+        .req-list h4 { font-size: 1rem; font-weight: 700; margin-bottom: 12px; color: var(--text); }
+        .req-list ul { display: flex; flex-direction: column; gap: 8px; }
+        .req-list li { font-size: 0.9rem; color: var(--text-light); padding-left: 20px; position: relative; }
+        .req-list li::before { content: '•'; position: absolute; left: 4px; color: var(--primary); font-weight: 700; }
+        .guide-section { padding: 80px 0; background: #fff; }
+        .guide-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+        .guide-card { background: var(--bg); border-radius: var(--radius); padding: 32px 24px; text-align: center; transition: all var(--transition); position: relative; }
+        .guide-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+        .guide-card .step-num { position: absolute; top: -16px; left: 50%; transform: translateX(-50%); width: 32px; height: 32px; background: var(--primary); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9rem; }
+        .guide-card .guide-icon { font-size: 2.5rem; margin: 16px 0 12px; }
+        .guide-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
+        .guide-card p { font-size: 0.85rem; color: var(--text-light); }
+        .faq-section { padding: 80px 0; }
+        .faq-list { max-width: 800px; margin: 0 auto; }
+        .faq-item { background: #fff; border-radius: var(--radius-sm); padding: 20px 24px; margin-bottom: 12px; box-shadow: var(--shadow); cursor: pointer; transition: all var(--transition); }
+        .faq-item:hover { box-shadow: var(--shadow-lg); }
+        .faq-item .faq-q { font-weight: 600; display: flex; justify-content: space-between; align-items: center; }
+        .faq-item .faq-q .arrow { transition: transform var(--transition); color: var(--primary); }
+        .faq-item.open .faq-q .arrow { transform: rotate(180deg); }
+        .faq-item .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; padding-top: 0; color: var(--text-light); font-size: 0.9rem; line-height: 1.7; }
+        .faq-item.open .faq-a { max-height: 200px; padding-top: 12px; }
+        .version-history { padding: 80px 0; background: #fff; }
+        .timeline { position: relative; max-width: 700px; margin: 0 auto; padding-left: 32px; }
+        .timeline::before { content: ''; position: absolute; left: 8px; top: 0; bottom: 0; width: 2px; background: var(--primary-bg); }
+        .tl-item { position: relative; margin-bottom: 32px; }
+        .tl-item::before { content: ''; position: absolute; left: -28px; top: 4px; width: 14px; height: 14px; background: var(--primary); border-radius: 50%; border: 3px solid #fff; box-shadow: 0 0 0 3px var(--primary-bg); }
+        .tl-item .tl-ver { font-weight: 700; font-size: 1.05rem; color: var(--primary); margin-bottom: 4px; }
+        .tl-item .tl-date { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 6px; }
+        .tl-item .tl-desc { font-size: 0.9rem; color: var(--text-light); line-height: 1.7; }
+        @media (max-width: 768px) {
+            .download-hero { padding: 40px 0 60px; }
+            .download-hero h1 { font-size: 1.8rem; }
+            .platform-tabs { margin: -28px 0 32px; }
+            .platform-tab { padding: 10px 20px; font-size: 0.85rem; }
+            .dl-panel-inner { grid-template-columns: 1fr; padding: 28px; gap: 24px; text-align: center; }
+            .dl-panel-inner .dl-btns { justify-content: center; }
+            .dl-panel-inner .dl-info .dl-meta { justify-content: center; }
+            .dl-panel-inner .dl-visual .dl-icon { font-size: 5rem; }
+            .guide-grid { grid-template-columns: 1fr; gap: 28px; }
+            .req-list { text-align: left; }
+        }
+        @media (max-width: 480px) {
+            .dl-panel-inner { padding: 20px; }
+            .dl-panel-inner .dl-info h2 { font-size: 1.4rem; }
+            .dl-panel-inner .dl-btns { flex-direction: column; }
+            .dl-panel-inner .dl-btns .btn { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="navbar">
+    <div class="container">
+        <a href="official.html" class="nav-logo"><div class="logo-icon"><img src="../favicon.ico"></div>沈阳阳安信息科技技术有限公司</a>
+        <div class="nav-links" id="navLinks">
+            <a href="official.html" class="active">首页</a>
+            <a href="official-products.html">产品服务</a>
+            <a href="official-articles.html">文章发布</a>
+            <a href="official-download.html">下载中心</a>
+            <a href="official-about.html">关于我们</a>
+            <a href="official-contact.html">联系我们</a>
+        </div>
+        <div class="nav-cta">
+            <a href="https://shop.yangan.top" class="btn btn-outline btn-sm" target="_blank">阳安云聊商城</a>
+            <a href="https://chat.yangan.top" class="btn btn-primary btn-sm" target="_blank">阳安小工具</a>
+        </div>
+        <button class="hamburger" id="hamburger" aria-label="菜单"><span></span><span></span><span></span></button>
+    </div>
+</nav>
+<div class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-inner">
+        <a href="official.html" class="mobile-nav-item active"><span class="icon">🏠</span><span>首页</span></a>
+        <a href="official-products.html" class="mobile-nav-item"><span class="icon">📦</span><span>产品</span></a>
+        <a href="official-articles.html" class="mobile-nav-item"><span class="icon">📰</span><span>文章</span></a>
+        <a href="official-download.html" class="mobile-nav-item"><span class="icon">📥</span><span>下载</span></a>
+    </div>
+</div>
+
+
+<div class="download-hero">
+    <div class="container">
+        <h1>下载中心</h1>
+        <p>选择您的平台，即刻开始阳安云聊体验</p>
+    </div>
+</div>
+
+<div class="container">
+    <div class="platform-tabs" id="platformTabs">
+        <button class="platform-tab active" data-platform="windows">🖥️ Windows</button>
+        <button class="platform-tab" data-platform="android">📱 Android</button>
+        <button class="platform-tab" data-platform="ios">🍎 iOS / Web</button>
+    </div>
+
+    <!-- Windows -->
+    <div class="dl-panel active" id="panel-windows">
+        <div class="dl-panel-inner">
+            <div class="dl-visual fade-in"><span class="dl-icon">🖥️</span></div>
+            <div class="dl-info fade-in">
+                <h2>阳安云聊 Windows 客户端</h2>
+                <span class="ver">v2.0.0 最新版</span>
+                <p class="desc">专为 Windows 桌面优化的即时通讯客户端，支持消息推送、文件拖拽传输、截图发送等桌面特性，让沟通更高效。</p>
+                <div class="dl-meta">
+                    <div class="dl-meta-item"><span class="ico">📦</span> 文件大小：约 45 MB</div>
+                    <div class="dl-meta-item"><span class="ico">📅</span> 更新日期：2026-07-20</div>
+                    <div class="dl-meta-item"><span class="ico">🔢</span> 版本号：2.0.0</div>
+                </div>
+                <div class="dl-btns">
+                    <a href="../download/yanganchat.exe" class="btn btn-primary btn-lg">立即下载 Windows 版</a>
+                    <a href="../download/yanganchat.exe" class="btn btn-outline" download>备用下载</a>
+                </div>
+                <div class="req-list">
+                    <h4>系统要求</h4>
+                    <ul>
+                        <li>操作系统：Windows 10 / 11 64位</li>
+                        <li>处理器：Intel Core i3 或同等性能及以上</li>
+                        <li>内存：4GB RAM 及以上</li>
+                        <li>存储空间：至少 200MB 可用空间</li>
+                        <li>网络：需要互联网连接</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Android -->
+    <div class="dl-panel" id="panel-android">
+        <div class="dl-panel-inner">
+            <div class="dl-visual fade-in"><span class="dl-icon">📱</span></div>
+            <div class="dl-info fade-in">
+                <h2>阳安云聊 Android 客户端</h2>
+                <span class="ver">v2.0.0 最新版</span>
+                <p class="desc">专为 Android 手机打造，支持消息推送、语音消息、拍照发送等移动特性，随时随地畅快沟通。</p>
+                <div class="dl-meta">
+                    <div class="dl-meta-item"><span class="ico">📦</span> 文件大小：约 28 MB</div>
+                    <div class="dl-meta-item"><span class="ico">📅</span> 更新日期：2026-07-20</div>
+                    <div class="dl-meta-item"><span class="ico">🔢</span> 版本号：2.0.0</div>
+                </div>
+                <div class="dl-btns">
+                    <a href="../download/yanganonline.apk" class="btn btn-primary btn-lg">下载 APK 安装包</a>
+                    <a href="../download/yanganonline.apk" class="btn btn-outline" download>备用下载</a>
+                </div>
+                <div class="req-list">
+                    <h4>系统要求</h4>
+                    <ul>
+                        <li>操作系统：Android 7.0 及以上</li>
+                        <li>处理器：ARMv7 或更高架构</li>
+                        <li>内存：3GB RAM 及以上</li>
+                        <li>存储空间：至少 100MB 可用空间</li>
+                        <li>网络：需要互联网连接</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- iOS / Web -->
+    <div class="dl-panel" id="panel-ios">
+        <div class="dl-panel-inner">
+            <div class="dl-visual fade-in"><span class="dl-icon">🍎</span></div>
+            <div class="dl-info fade-in">
+                <h2>阳安云聊 Web 版</h2>
+                <span class="ver">无需安装</span>
+                <p class="desc">使用 Safari 浏览器打开并添加到主屏幕，即可获得接近原生 App 的体验。支持消息推送、文件传输等核心功能，跨平台无缝使用。</p>
+                <div class="dl-meta">
+                    <div class="dl-meta-item"><span class="ico">🌐</span> 访问地址：https://yangan.top</div>
+                    <div class="dl-meta-item"><span class="ico">📱</span> 支持设备：iPhone / iPad</div>
+                    <div class="dl-meta-item"><span class="ico">🔧</span> 浏览器：Safari</div>
+                </div>
+                <div class="dl-btns">
+                    <a href="https://yangan.top" class="btn btn-accent btn-lg" target="_blank">打开 Web 版</a>
+                    <a href="https://yangan.top" class="btn btn-outline" target="_blank">访问备用地址</a>
+                </div>
+                <div class="req-list">
+                    <h4>安装指南</h4>
+                    <ul>
+                        <li>使用 Safari 浏览器打开 https://yangan.top</li>
+                        <li>点击底部「分享」按钮</li>
+                        <li>选择「添加到主屏幕」</li>
+                        <li>主屏幕即出现阳安云聊图标，点击即可使用</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 安装指南 -->
+<section class="guide-section">
+    <div class="container">
+        <div class="section-header fade-in">
+            <div class="section-tag">安装指南</div>
+            <h2 class="section-title">三步完成安装</h2>
+            <p class="section-desc">简单快速，即刻开启阳安云聊体验</p>
+        </div>
+        <div class="guide-grid">
+            <div class="guide-card fade-in">
+                <div class="step-num">1</div>
+                <div class="guide-icon">📥</div>
+                <h3>下载客户端</h3>
+                <p>根据您的设备选择对应版本，点击下载按钮获取安装包</p>
+            </div>
+            <div class="guide-card fade-in">
+                <div class="step-num">2</div>
+                <div class="guide-icon">⚙️</div>
+                <h3>安装应用</h3>
+                <p>双击安装包按照指引完成安装，Android需允许安装未知来源应用</p>
+            </div>
+            <div class="guide-card fade-in">
+                <div class="step-num">3</div>
+                <div class="guide-icon">🚀</div>
+                <h3>开始使用</h3>
+                <p>注册或登录账号，即可开始聊天、传输文件，畅享即时通讯</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 版本历史 -->
+<section class="version-history">
+    <div class="container">
+        <div class="section-header fade-in">
+            <div class="section-tag">更新记录</div>
+            <h2 class="section-title">版本历史</h2>
+            <p class="section-desc">持续迭代优化，为您带来更好的体验</p>
+        </div>
+        <div class="timeline">
+            <div class="tl-item fade-in">
+                <div class="tl-ver">v2.0.0</div>
+                <div class="tl-date">2026-07-20</div>
+                <div class="tl-desc">全新UI界面升级，优化消息推送机制，新增文件拖拽传输功能，提升整体性能与稳定性。</div>
+            </div>
+            <div class="tl-item fade-in">
+                <div class="tl-ver">v1.5.0</div>
+                <div class="tl-date">2026-05-15</div>
+                <div class="tl-desc">新增红包与转账功能，支持群聊@提醒，优化图片加载速度，修复已知Bug。</div>
+            </div>
+            <div class="tl-item fade-in">
+                <div class="tl-ver">v1.2.0</div>
+                <div class="tl-date">2026-03-10</div>
+                <div class="tl-desc">新增扫码登录功能，支持多端消息同步，优化文件传输稳定性。</div>
+            </div>
+            <div class="tl-item fade-in">
+                <div class="tl-ver">v1.0.0</div>
+                <div class="tl-date">2026-01-01</div>
+                <div class="tl-desc">阳安云聊正式发布，支持文字、图片消息，群聊与私聊，基础文件传输功能。</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 常见问题 -->
+<section class="faq-section">
+    <div class="container">
+        <div class="section-header fade-in">
+            <div class="section-tag">常见问题</div>
+            <h2 class="section-title">FAQ</h2>
+            <p class="section-desc">快速解答您的疑问</p>
+        </div>
+        <div class="faq-list">
+            <div class="faq-item fade-in" onclick="this.classList.toggle('open')">
+                <div class="faq-q">如何注册阳安云聊账号？<span class="arrow">▼</span></div>
+                <div class="faq-a">打开阳安云聊客户端，点击「注册」按钮，输入手机号获取验证码，设置密码后即可完成注册。</div>
+            </div>
+            <div class="faq-item fade-in" onclick="this.classList.toggle('open')">
+                <div class="faq-q">Windows 安装时提示安全警告怎么办？<span class="arrow">▼</span></div>
+                <div class="faq-a">阳安云聊经过安全检测，请放心使用。点击「更多信息」后选择「仍要运行」即可继续安装。</div>
+            </div>
+            <div class="faq-item fade-in" onclick="this.classList.toggle('open')">
+                <div class="faq-q">Android 安装时提示「未知来源」如何解决？<span class="arrow">▼</span></div>
+                <div class="faq-a">请在手机「设置」→「安全」中开启「允许安装未知来源应用」，然后重新安装即可。</div>
+            </div>
+            <div class="faq-item fade-in" onclick="this.classList.toggle('open')">
+                <div class="faq-q">iOS 端如何安装？<span class="arrow">▼</span></div>
+                <div class="faq-a">iOS 端目前提供 Web 版（PWA）体验。使用 Safari 浏览器打开 https://yangan.top，点击分享按钮选择「添加到主屏幕」即可。</div>
+            </div>
+            <div class="faq-item fade-in" onclick="this.classList.toggle('open')">
+                <div class="faq-q">如何更新到最新版本？<span class="arrow">▼</span></div>
+                <div class="faq-a">打开客户端后，系统会自动检测新版本并提示更新。您也可以访问本页面手动下载最新版本覆盖安装。</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand"><h3>阳安科技</h3><p>智慧连接 · 安心购物</p><p style="margin-top:12px;">致力于打造一站式数字化服务平台，提供即时通讯、在线商城、云应用及AI智能聊天等全方位产品。</p></div>
+            <div class="footer-col"><h4>产品服务</h4><ul><li><a href="https://yangan.top" target="_blank">阳安云聊</a></li><li><a href="https://shop.yangan.top" target="_blank">阳安商城</a></li><li></li><li><a href="https://chat.yangan.top" target="_blank">小工具</a></li></ul></div>
+            <div class="footer-col"><h4>快速导航</h4><ul><li><a href="official-about.html">关于我们</a></li><li><a href="official-products.html">产品服务</a></li><li><a href="official-articles.html">文章解读</a></li><li><a href="official-download.html">下载中心</a></li><li><a href="official-contact.html">联系我们</a></li></ul></div>
+            <div class="footer-col"><h4>支持平台</h4><ul><li><a href="../download/yanganchat.exe">Windows 客户端</a></li><li><a href="../download/yanganonline.apk">Android 客户端</a></li><li><a href="https://yangan.top" target="_blank">Web / iOS 端</a></li></ul></div>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; 2022-2026 阳安科技 版权所有</span>
+            <span><a href="https://yangan.top">yangan.top</a> | <a href="https://shop.yangan.top">shop.yangan.top</a> | <a href="https://chat.yangan.top">chat.yanga.top</a></span>
+        </div>
+    </div>
+</footer>
+<button class="back-to-top" id="backToTop" aria-label="返回顶部">↑</button>
+
+<script src="official.js"></script>
+<script>
+// 平台切换标签
+document.querySelectorAll('.platform-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+        document.querySelectorAll('.platform-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        document.querySelectorAll('.dl-panel').forEach(p => p.classList.remove('active'));
+        document.getElementById('panel-' + tab.dataset.platform).classList.add('active');
+    });
+});
+</script>
+</body>
+</html>

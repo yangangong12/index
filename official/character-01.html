@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>张明远 - 技术总监 - 阳安科技</title>
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="stylesheet" href="official.css">
+    <style>
+        .char-hero {
+            background: linear-gradient(135deg, var(--primary-darker) 0%, var(--primary-dark) 60%, var(--primary) 100%);
+            color: #fff; padding: 110px 0 56px; margin-top: var(--nav-height);
+        }
+        .char-hero-inner { display: flex; align-items: center; gap: 40px; flex-wrap: wrap; }
+        .char-avatar {
+            width: 180px; height: 180px; border-radius: 50%; overflow: hidden; flex-shrink: 0;
+            border: 4px solid rgba(255,255,255,0.35); box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+        }
+        .char-avatar img { width: 100%; height: 100%; object-fit: cover; }
+        .char-hero-info { flex: 1; min-width: 260px; }
+        .char-hero-info .char-tag {
+            display: inline-block; padding: 5px 14px; margin-bottom: 12px;
+            background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 50px; font-size: 0.8rem; font-weight: 600;
+        }
+        .char-hero-info h1 { font-size: 2.4rem; font-weight: 800; margin-bottom: 8px; }
+        .char-hero-info .char-role { font-size: 1.1rem; color: var(--accent-light); font-weight: 600; margin-bottom: 12px; }
+        .char-hero-info .char-slogan { font-size: 0.95rem; opacity: 0.85; max-width: 560px; }
+        .char-hero-info .char-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+        .char-hero-info .char-tags span {
+            font-size: 0.78rem; background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.2); border-radius: 50px; padding: 4px 12px;
+        }
+        .char-facts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: -34px; position: relative; z-index: 2; }
+        .char-fact { background: #fff; border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow-lg); text-align: center; }
+        .char-fact .fact-label { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 4px; }
+        .char-fact .fact-value { font-size: 0.95rem; font-weight: 700; color: var(--text); }
+        .char-section { background: #fff; border-radius: var(--radius); padding: 32px; box-shadow: var(--shadow); margin-bottom: 24px; }
+        .char-section h2 { font-size: 1.25rem; font-weight: 700; margin-bottom: 18px; padding-left: 14px; border-left: 4px solid var(--primary); }
+        .char-section p { color: var(--text-light); line-height: 1.9; margin-bottom: 14px; }
+        .char-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        .char-skill { display: flex; gap: 12px; align-items: flex-start; padding: 14px 16px; background: var(--bg); border-radius: var(--radius-sm); }
+        .char-skill .sk-ico { font-size: 1.3rem; }
+        .char-skill .sk-name { font-weight: 700; font-size: 0.92rem; }
+        .char-skill .sk-desc { font-size: 0.82rem; color: var(--text-light); line-height: 1.6; }
+        .char-honor { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px dashed var(--border); }
+        .char-honor:last-child { border-bottom: none; }
+        .char-honor .h-ico { font-size: 1.2rem; }
+        .char-honor .h-text { font-size: 0.92rem; }
+        .char-honor .h-year { margin-left: auto; font-size: 0.8rem; color: var(--text-muted); white-space: nowrap; }
+        .char-back { text-align: center; margin: 8px 0 40px; }
+        .char-pager { display: flex; justify-content: space-between; gap: 16px; margin-top: 28px; }
+        .char-pager a { flex: 1; background: #fff; border-radius: var(--radius); padding: 18px 24px; box-shadow: var(--shadow); transition: all var(--transition); }
+        .char-pager a:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
+        .char-pager a .p-label { font-size: 0.75rem; color: var(--text-muted); }
+        .char-pager a .p-name { font-weight: 700; margin-top: 4px; }
+        .char-pager a.next { text-align: right; }
+        @media (max-width: 768px) {
+            .char-hero-inner { justify-content: center; text-align: center; gap: 24px; }
+            .char-hero-info .char-slogan { margin: 0 auto; }
+            .char-facts { grid-template-columns: repeat(2, 1fr); }
+            .char-cols { grid-template-columns: 1fr; }
+            .char-section { padding: 22px; }
+            .char-hero-info h1 { font-size: 1.9rem; }
+        }
+        @media (max-width: 480px) { .char-facts { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="navbar">
+    <div class="container">
+        <a href="official.html" class="nav-logo"><div class="logo-icon"><img src="../favicon.ico"></div>沈阳阳安信息科技技术有限公司</a>
+        <div class="nav-links" id="navLinks">
+            <a href="official.html">首页</a>
+            <a href="official-products.html">产品服务</a>
+            <a href="official-articles.html">文章发布</a>
+            <a href="official-characters.html" class="active">人物介绍</a>
+            <a href="official-download.html">下载中心</a>
+            <a href="official-about.html">关于我们</a>
+            <a href="official-contact.html">联系我们</a>
+        </div>
+        <div class="nav-cta">
+            <a href="https://shop.yangan.top" class="btn btn-outline btn-sm" target="_blank">阳安云聊商城</a>
+            <a href="https://chat.yangan.top" class="btn btn-primary btn-sm" target="_blank">阳安小工具</a>
+        </div>
+        <button class="hamburger" id="hamburger" aria-label="菜单"><span></span><span></span><span></span></button>
+    </div>
+</nav>
+<div class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-inner">
+        <a href="official.html" class="mobile-nav-item"><span class="icon">🏠</span><span>首页</span></a>
+        <a href="official-products.html" class="mobile-nav-item"><span class="icon">📦</span><span>产品</span></a>
+        <a href="official-articles.html" class="mobile-nav-item"><span class="icon">📰</span><span>文章</span></a>
+        <a href="official-characters.html" class="mobile-nav-item active"><span class="icon">👥</span><span>人物</span></a>
+        <a href="official-download.html" class="mobile-nav-item"><span class="icon">📥</span><span>下载</span></a>
+    </div>
+</div>
+
+<section class="char-hero">
+    <div class="container">
+        <div class="char-hero-inner">
+            <div class="char-avatar">
+                <img src="images/characters/tech-director.jpg" alt="张明远">
+            </div>
+            <div class="char-hero-info">
+                <span class="char-tag">阳安科技 · 核心团队</span>
+                <h1>张明远</h1>
+                <div class="char-role">技术总监</div>
+                <p class="char-slogan">十余年技术深耕，用代码构建阳安云聊与商城的坚实底座，让稳定与安全成为产品的底色。</p>
+                <div class="char-tags">
+                    <span>技术架构</span>
+                    <span>AI 研发</span>
+                    <span>团队管理</span>
+                    <span>系统安全</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section" style="padding-top:60px;">
+    <div class="container">
+
+        <div class="char-facts">
+            <div class="char-fact"><div class="fact-label">所属部门</div><div class="fact-value">研发中心</div></div>
+            <div class="char-fact"><div class="fact-label">入职时间</div><div class="fact-value">2020 年</div></div>
+            <div class="char-fact"><div class="fact-label">联系方式</div><div class="fact-value">zhang@yangan.top</div></div>
+            <div class="char-fact"><div class="fact-label">工作地点</div><div class="fact-value">沈阳</div></div>
+        </div>
+
+        <div class="char-section">
+            <h2>人物介绍</h2>
+            <p>张明远毕业于东北大学计算机科学与技术专业，专注后端架构与分布式系统设计与研发十余年。加入阳安科技前，曾在多家互联网企业担任核心技术负责人，主导过多个日活百万级平台的架构升级与重构。</p>
+            <p>2020 年加入阳安科技后，他全面负责公司技术体系的搭建与演进，先后主导了阳安云聊即时通讯平台、阳安商城交易系统的架构设计与落地，为平台海量用户提供了稳定、流畅、安全的服务保障，是公司技术团队的核心与领航者。</p>
+            <p>在工作中，张明远始终信奉「稳定压倒一切，安全重于泰山」。他倡导代码可读、文档完善、测试到位的工程文化，强调把复杂留给自己，把简单留给用户。在他的带领下，研发团队成长为一支技术扎实、协作高效的精英队伍。</p>
+        </div>
+
+        <div class="char-section">
+            <h2>工作职责与擅长领域</h2>
+            <div class="char-cols">
+                <div class="char-skill"><div class="sk-ico">⚙️</div><div><div class="sk-name">技术架构设计</div><div class="sk-desc">负责公司各产品线的整体技术架构与演进路线，保障系统高可用、高并发与可扩展性。</div></div></div>
+                <div class="char-skill"><div class="sk-ico">🤖</div><div><div class="sk-name">AI 引擎研发</div><div class="sk-desc">主导云工具 AI 聊天引擎的模型接入、服务编排与性能优化，让智能体验触手可及。</div></div></div>
+                <div class="char-skill"><div class="sk-ico">🛡️</div><div><div class="sk-name">系统安全防护</div><div class="sk-desc">构建纵深防御体系，保障用户数据安全与业务合规，守护每一笔交易与每一条消息。</div></div></div>
+                <div class="char-skill"><div class="sk-ico">🎯</div><div><div class="sk-name">研发团队管理</div><div class="sk-desc">培养技术梯队，制定工程规范与质量基线，提升团队的交付效率与研发质量。</div></div></div>
+            </div>
+        </div>
+
+        <div class="char-section">
+            <h2>荣誉与成就</h2>
+            <div class="char-honor"><div class="h-ico">🏆</div><div class="h-text">带领团队完成阳安商城交易系统第三代架构升级</div><div class="h-year">2024 年</div></div>
+            <div class="char-honor"><div class="h-ico">🥇</div><div class="h-text">主导阳安云聊即时通讯平台上线，支撑百万级并发</div><div class="h-year">2023 年</div></div>
+            <div class="char-honor"><div class="h-ico">🎖️</div><div class="h-text">通过国家级信息安全等级保护三级认证</div><div class="h-year">2022 年</div></div>
+        </div>
+
+        <div class="char-back">
+            <a href="official-characters.html" class="btn btn-primary">← 返回人物列表</a>
+        </div>
+        <div class="char-pager">
+            <a href="character-04.html"><div class="p-label">上一个</div><div class="p-name">陈晓彤</div></a>
+            <a href="character-02.html" class="next"><div class="p-label">下一个</div><div class="p-name">李思雨</div></a>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand"><h3>阳安科技</h3><p>智慧连接 · 安心购物</p><p style="margin-top:12px;">致力于打造一站式数字化服务平台，提供即时通讯、在线商城、云应用及AI智能聊天等全方位产品。</p></div>
+            <div class="footer-col"><h4>产品服务</h4><ul><li><a href="https://yangan.top" target="_blank">阳安云聊</a></li><li><a href="https://shop.yangan.top" target="_blank">阳安商城</a></li><li></li><li><a href="https://chat.yangan.top" target="_blank">小工具</a></li></ul></div>
+            <div class="footer-col"><h4>快速导航</h4><ul><li><a href="official-about.html">关于我们</a></li><li><a href="official-products.html">产品服务</a></li><li><a href="official-articles.html">文章解读</a></li><li><a href="official-characters.html">人物介绍</a></li><li><a href="official-download.html">下载中心</a></li><li><a href="official-contact.html">联系我们</a></li></ul></div>
+            <div class="footer-col"><h4>支持平台</h4><ul><li><a href="../download/yanganchat.exe">Windows 客户端</a></li><li><a href="../download/yanganonline.apk">Android 客户端</a></li><li><a href="https://yangan.top" target="_blank">Web / iOS 端</a></li></ul></div>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; 2022-2026 阳安科技 版权所有</span>
+            <span><a href="https://yangan.top">yangan.top</a> | <a href="https://shop.yangan.top">shop.yangan.top</a> | <a href="https://chat.yangan.top">chat.yanga.top</a></span>
+        </div>
+    </div>
+</footer>
+<button class="back-to-top" id="backToTop" aria-label="返回顶部">↑</button>
+
+<script src="official.js"></script>
+</body>
+</html>

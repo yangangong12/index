@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="联系阳安科技 - 商务合作、技术支持、媒体咨询等联系方式">
+    <title>联系我们 - 阳安科技</title>
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="stylesheet" href="official.css">
+    <style>
+        .contact-hero { background: linear-gradient(135deg, #0d47a1, #1e88e5); padding: 100px 0 80px; color: #fff; text-align: center; }
+        .contact-hero h1 { font-size: 2.8rem; font-weight: 800; margin-bottom: 12px; }
+        .contact-hero p { font-size: 1.1rem; opacity: 0.85; max-width: 550px; margin: 0 auto; }
+        .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; padding: 60px 0; }
+        .contact-form-wrap { background: #fff; border-radius: var(--radius); padding: 40px; box-shadow: var(--shadow-lg); }
+        .contact-form-wrap h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 8px; }
+        .contact-form-wrap .sub { color: var(--text-light); font-size: 0.9rem; margin-bottom: 28px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-size: 0.9rem; font-weight: 600; margin-bottom: 6px; color: var(--text); }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%; padding: 12px 16px; border: 2px solid var(--border); border-radius: var(--radius-sm);
+            font-size: 0.95rem; font-family: inherit; transition: border-color var(--transition); outline: none; background: #fff;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--primary); }
+        .form-group textarea { resize: vertical; min-height: 120px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .contact-info-section { display: flex; flex-direction: column; gap: 24px; }
+        .info-card { background: #fff; border-radius: var(--radius); padding: 28px; box-shadow: var(--shadow); transition: all var(--transition); }
+        .info-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+        .info-card .info-icon { width: 48px; height: 48px; background: var(--primary-bg); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 14px; }
+        .info-card h4 { font-size: 1.05rem; font-weight: 700; margin-bottom: 6px; }
+        .info-card p { color: var(--text-light); font-size: 0.9rem; line-height: 1.6; }
+        .info-card .info-link { color: var(--primary); font-weight: 500; }
+        .qr-card { background: #fff; border-radius: var(--radius); padding: 28px; box-shadow: var(--shadow); text-align: center; }
+        .qr-card .qr-placeholder { width: 140px; height: 140px; background: var(--bg); border-radius: var(--radius-sm); margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; font-size: 4rem; }
+        .qr-card h4 { font-size: 1.05rem; font-weight: 700; margin-bottom: 4px; }
+        .qr-card p { font-size: 0.85rem; color: var(--text-light); }
+        .business-hours { background: #fff; border-radius: var(--radius); padding: 28px; box-shadow: var(--shadow); }
+        .business-hours h4 { font-size: 1.05rem; font-weight: 700; margin-bottom: 16px; }
+        .hours-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #f5f5f5; font-size: 0.9rem; }
+        .hours-row:last-child { border-bottom: none; }
+        .hours-row .day { color: var(--text); }
+        .hours-row .time { color: var(--text-light); }
+        .app-links { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 12px; }
+        .app-link { display: inline-flex; align-items: center; gap: 6px; padding: 8px 18px; background: var(--primary-bg); color: var(--primary); border-radius: 50px; font-size: 0.85rem; font-weight: 600; transition: all var(--transition); text-decoration: none; }
+        .app-link:hover { background: var(--primary); color: #fff; }
+        .map-section { padding: 0 0 80px; }
+        .map-placeholder { width: 100%; height: 360px; background: linear-gradient(135deg, #e3f2fd, #bbdefb); border-radius: var(--radius); display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--primary); font-size: 1.2rem; box-shadow: var(--shadow); }
+        .map-placeholder .map-icon { font-size: 4rem; margin-bottom: 12px; }
+        .toast { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: var(--success); color: #fff; padding: 12px 28px; border-radius: 50px; font-weight: 600; z-index: 9999; box-shadow: var(--shadow-lg); animation: toastIn 0.3s ease, toastOut 0.3s ease 2s forwards; }
+        @keyframes toastIn { from { opacity: 0; transform: translateX(-50%) translateY(-20px); } to { opacity: 1; transform: translateX(-50%) translateY(0); } }
+        @keyframes toastOut { from { opacity: 1; } to { opacity: 0; transform: translateX(-50%) translateY(-20px); } }
+        @media (max-width: 768px) {
+            .contact-hero { padding: 70px 0 50px; }
+            .contact-hero h1 { font-size: 1.8rem; }
+            .contact-layout { grid-template-columns: 1fr; gap: 32px; padding: 40px 0; }
+            .contact-form-wrap { padding: 24px; }
+            .form-row { grid-template-columns: 1fr; }
+            .map-placeholder { height: 240px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="navbar">
+    <div class="container">
+        <a href="official.html" class="nav-logo"><div class="logo-icon"><img src="../favicon.ico"></div>沈阳阳安信息科技技术有限公司</a>
+        <div class="nav-links" id="navLinks">
+            <a href="official.html" class="active">首页</a>
+            <a href="official-products.html">产品服务</a>
+            <a href="official-articles.html">文章发布</a>
+            <a href="official-download.html">下载中心</a>
+            <a href="official-about.html">关于我们</a>
+            <a href="official-contact.html">联系我们</a>
+        </div>
+        <div class="nav-cta">
+            <a href="https://shop.yangan.top" class="btn btn-outline btn-sm" target="_blank">阳安云聊商城</a>
+            <a href="https://chat.yangan.top" class="btn btn-primary btn-sm" target="_blank">阳安小工具</a>
+        </div>
+        <button class="hamburger" id="hamburger" aria-label="菜单"><span></span><span></span><span></span></button>
+    </div>
+</nav>
+<div class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-inner">
+        <a href="official.html" class="mobile-nav-item active"><span class="icon">🏠</span><span>首页</span></a>
+        <a href="official-products.html" class="mobile-nav-item"><span class="icon">📦</span><span>产品</span></a>
+        <a href="official-articles.html" class="mobile-nav-item"><span class="icon">📰</span><span>文章</span></a>
+        <a href="official-download.html" class="mobile-nav-item"><span class="icon">📥</span><span>下载</span></a>
+    </div>
+</div>
+
+
+<div class="contact-hero">
+    <div class="container">
+        <h1>联系我们</h1>
+        <p>无论是商务合作、技术咨询还是产品反馈，阳安科技期待与您沟通交流</p>
+    </div>
+</div>
+
+<div class="container">
+    <div class="contact-layout">
+        <!-- 联系表单 -->
+        <div class="contact-form-wrap fade-in">
+            <h3>发送消息</h3>
+            <p class="sub">填写以下表单，我们将在24小时内与您联系</p>
+            <form id="contactForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">姓名 *</label>
+                        <input type="text" id="name" placeholder="请输入您的姓名" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">邮箱 *</label>
+                        <input type="email" id="email" placeholder="请输入您的邮箱" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="phone">电话</label>
+                        <input type="tel" id="phone" placeholder="请输入您的电话（选填）">
+                    </div>
+                    <div class="form-group">
+                        <label for="type">咨询类型 *</label>
+                        <select id="type" required>
+                            <option value="">请选择</option>
+                            <option value="商务合作">商务合作</option>
+                            <option value="技术支持">技术支持</option>
+                            <option value="产品反馈">产品反馈</option>
+                            <option value="媒体咨询">媒体咨询</option>
+                            <option value="其他">其他</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="subject">主题 *</label>
+                    <input type="text" id="subject" placeholder="请输入消息主题" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">留言内容 *</label>
+                    <textarea id="message" placeholder="请详细描述您的需求或问题..." required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block btn-lg">发送消息</button>
+            </form>
+        </div>
+
+        <!-- 联系信息 -->
+        <div class="contact-info-section fade-in">
+            <div class="info-card">
+                <div class="info-icon">🌐</div>
+                <h4>官方网站</h4>
+                <p>访问阳安科技官方网站了解更多产品信息</p>
+                <a href="https://yangan.top" class="info-link" target="_blank">https://yangan.top →</a>
+            </div>
+            <div class="info-card">
+                <div class="info-icon">🛒</div>
+                <h4>官方商城</h4>
+                <p>在线购物平台，全品类商品一站购齐</p>
+                <a href="https://shop.yangan.top" class="info-link" target="_blank">https://shop.yangan.top →</a>
+            </div>
+            <div class="info-card">
+                <div class="info-icon">📧</div>
+                <h4>电子邮箱</h4>
+                <p>商务合作：<a href="mailto:yangan@yangan.top" class="info-link">yangan@yangan.top</a></p>
+                <p>技术支持：<a href="mailto:support@yangan.top" class="info-link">support@yangan.top</a></p>
+            </div>
+            <div class="info-card">
+                <div class="info-icon">💬</div>
+                <h4>微信公众号</h4>
+                <p>微信搜索「智慧阳安」关注公众号，获取最新产品动态与服务资讯</p>
+            </div>
+            <div class="qr-card">
+                <div class="qr-placeholder">📱</div>
+                <h4>关注微信公众号</h4>
+                <p>微信搜索「智慧阳安」</p>
+                <p style="margin-top:4px;font-size:0.8rem;color:var(--text-muted);">获取最新产品动态与服务资讯</p>
+            </div>
+            <div class="app-links">
+                <a href="https://yangan.top" class="app-link" target="_blank">🌐 阳安云聊</a>
+                <a href="https://shop.yangan.top" class="app-link" target="_blank">🛒 阳安商城</a>
+                <a href="https://chat.yanga.top" class="app-link" target="_blank">🤖 AI聊天</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 地图 -->
+<section class="map-section">
+    <div class="container">
+        <div class="map-placeholder fade-in">
+            <div class="map-icon">📍</div>
+            <p>阳安科技 · 在线服务</p>
+            <p style="font-size:0.9rem;opacity:0.7;margin-top:8px;">我们提供在线服务，随时随地为您解答问题</p>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand"><h3>阳安科技</h3><p>智慧连接 · 安心购物</p><p style="margin-top:12px;">致力于打造一站式数字化服务平台，提供即时通讯、在线商城、云应用及AI智能聊天等全方位产品。</p></div>
+            <div class="footer-col"><h4>产品服务</h4><ul><li><a href="https://yangan.top" target="_blank">阳安云聊</a></li><li><a href="https://shop.yangan.top" target="_blank">阳安商城</a></li><li></li><li><a href="https://chat.yangan.top" target="_blank">小工具</a></li></ul></div>
+            <div class="footer-col"><h4>快速导航</h4><ul><li><a href="official-about.html">关于我们</a></li><li><a href="official-products.html">产品服务</a></li><li><a href="official-articles.html">文章解读</a></li><li><a href="official-download.html">下载中心</a></li><li><a href="official-contact.html">联系我们</a></li></ul></div>
+            <div class="footer-col"><h4>支持平台</h4><ul><li><a href="../download/yanganchat.exe">Windows 客户端</a></li><li><a href="../download/yanganonline.apk">Android 客户端</a></li><li><a href="https://yangan.top" target="_blank">Web / iOS 端</a></li></ul></div>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; 2022-2026 阳安科技 版权所有</span>
+            <span><a href="https://yangan.top">yangan.top</a> | <a href="https://shop.yangan.top">shop.yangan.top</a> | <a href="https://chat.yangan.top">chat.yanga.top</a></span>
+        </div>
+    </div>
+</footer>
+<button class="back-to-top" id="backToTop" aria-label="返回顶部">↑</button>
+
+<script src="official.js"></script>
+<script>
+// 表单提交
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const type = document.getElementById('type').value;
+    const subject = document.getElementById('subject').value.trim();
+    const message = document.getElementById('message').value.trim();
+
+    if (!name || !email || !type || !subject || !message) {
+        showToast('请填写所有必填字段', 'error');
+        return;
+    }
+
+    // 构造提交数据
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('email', email);
+    formData.append('phone', document.getElementById('phone').value.trim());
+    formData.append('type', type);
+    formData.append('subject', subject);
+    formData.append('message', message);
+
+    // 发送到后端
+    fetch('../api/contact.php', {
+        method: 'POST',
+        body: formData
+    }).then(res => res.json()).then(data => {
+        if (data && data.success) {
+            showToast('消息发送成功，我们会尽快回复您！');
+            document.getElementById('contactForm').reset();
+        } else {
+            showToast('发送失败，请稍后重试或直接发送邮件至 support@yangan.top', 'error');
+        }
+    }).catch(() => {
+        showToast('发送失败，请稍后重试或直接发送邮件至 support@yangan.top', 'error');
+    });
+});
+
+function showToast(msg, type) {
+    const existing = document.querySelector('.toast');
+    if (existing) existing.remove();
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.textContent = msg;
+    if (type === 'error') toast.style.background = 'var(--danger)';
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 2500);
+}
+</script>
+</body>
+</html>

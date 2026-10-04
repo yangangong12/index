@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="关于阳安科技 - 了解我们的使命、愿景、团队和发展历程">
+    <title>关于我们 - 阳安科技</title>
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="stylesheet" href="official.css">
+    <style>
+        .about-hero { background: linear-gradient(135deg, #0d47a1, #1e88e5); padding: 100px 0 80px; color: #fff; text-align: center; }
+        .about-hero h1 { font-size: 2.8rem; font-weight: 800; margin-bottom: 12px; }
+        .about-hero p { font-size: 1.1rem; opacity: 0.85; max-width: 600px; margin: 0 auto; }
+        .mission-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: -60px; position: relative; z-index: 1; }
+        .mission-card { background: #fff; border-radius: var(--radius); padding: 36px 28px; text-align: center; box-shadow: var(--shadow-lg); transition: all var(--transition); }
+        .mission-card:hover { transform: translateY(-8px); }
+        .mission-card .m-icon { width: 64px; height: 64px; background: var(--primary-bg); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 2rem; }
+        .mission-card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 10px; }
+        .mission-card p { font-size: 0.9rem; color: var(--text-light); line-height: 1.7; }
+        .story-section { padding: 80px 0; background: #fff; }
+        .story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .story-grid .story-visual { text-align: center; }
+        .story-grid .story-visual .story-icon { font-size: 10rem; display: block; }
+        .story-grid .story-text h2 { font-size: 2rem; font-weight: 700; margin-bottom: 20px; }
+        .story-grid .story-text h2 span { color: var(--primary); }
+        .story-grid .story-text p { color: var(--text-light); font-size: 1.05rem; line-height: 1.9; margin-bottom: 16px; }
+        .timeline-section { padding: 80px 0; }
+        .milestone-timeline { position: relative; max-width: 800px; margin: 0 auto; padding: 0 20px; }
+        .milestone-timeline::before { content: ''; position: absolute; left: 50%; transform: translateX(-50%); top: 0; bottom: 0; width: 2px; background: var(--border); }
+        .ms-item { display: flex; align-items: flex-start; margin-bottom: 48px; position: relative; }
+        .ms-item:nth-child(odd) { flex-direction: row; }
+        .ms-item:nth-child(even) { flex-direction: row-reverse; }
+        .ms-item .ms-dot { width: 16px; height: 16px; background: var(--primary); border-radius: 50%; border: 4px solid #fff; box-shadow: 0 0 0 4px var(--primary-bg); position: absolute; left: 50%; top: 4px; transform: translateX(-50%); z-index: 1; }
+        .ms-item .ms-content { width: 42%; padding: 24px; background: #fff; border-radius: var(--radius); box-shadow: var(--shadow); transition: all var(--transition); }
+        .ms-item .ms-content:hover { box-shadow: var(--shadow-lg); }
+        .ms-item .ms-content .ms-year { display: inline-block; padding: 4px 12px; background: var(--primary-bg); color: var(--primary); border-radius: 50px; font-size: 0.8rem; font-weight: 600; margin-bottom: 8px; }
+        .ms-item .ms-content h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 6px; }
+        .ms-item .ms-content p { font-size: 0.9rem; color: var(--text-light); line-height: 1.7; }
+        .values-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+        .value-card { background: #fff; border-radius: var(--radius); padding: 36px 20px; text-align: center; box-shadow: var(--shadow); transition: all var(--transition); border-top: 4px solid transparent; }
+        .value-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-top-color: var(--primary); }
+        .value-card .v-icon { font-size: 2.5rem; margin-bottom: 16px; }
+        .value-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
+        .value-card p { font-size: 0.85rem; color: var(--text-light); line-height: 1.6; }
+        .team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+        .team-card { background: #fff; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); transition: all var(--transition); text-align: center; }
+        .team-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+        .team-card .avatar { width: 100%; aspect-ratio: 1; background: var(--primary-bg); display: flex; align-items: center; justify-content: center; font-size: 4rem; }
+        .team-card .t-info { padding: 20px 16px; }
+        .team-card .t-info h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 4px; }
+        .team-card .t-info .role { color: var(--primary); font-size: 0.85rem; font-weight: 500; margin-bottom: 8px; }
+        .team-card .t-info .bio { color: var(--text-light); font-size: 0.8rem; line-height: 1.5; }
+        .stat-bar { background: linear-gradient(135deg, var(--primary-darker), var(--primary-dark)); padding: 60px 0; color: #fff; text-align: center; }
+        .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; }
+        .stat-item .stat-num { font-size: 2.5rem; font-weight: 800; line-height: 1; margin-bottom: 8px; }
+        .stat-item .stat-label { font-size: 0.9rem; opacity: 0.7; }
+        @media (max-width: 1024px) {
+            .values-grid { grid-template-columns: repeat(2, 1fr); }
+            .team-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .about-hero { padding: 70px 0 50px; }
+            .about-hero h1 { font-size: 1.8rem; }
+            .mission-grid { grid-template-columns: 1fr; margin-top: -40px; }
+            .story-grid { grid-template-columns: 1fr; gap: 32px; text-align: center; }
+            .story-grid .story-visual .story-icon { font-size: 6rem; }
+            .milestone-timeline::before { left: 20px; }
+            .ms-item, .ms-item:nth-child(even) { flex-direction: row; }
+            .ms-item .ms-dot { left: 20px; }
+            .ms-item .ms-content { width: calc(100% - 48px); margin-left: 40px; }
+            .ms-item:nth-child(even) .ms-content { margin-left: 40px; margin-right: 0; }
+            .values-grid { grid-template-columns: 1fr; }
+            .team-grid { grid-template-columns: repeat(2, 1fr); }
+            .stat-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+            .stat-item .stat-num { font-size: 2rem; }
+        }
+        @media (max-width: 480px) {
+            .team-grid { grid-template-columns: 1fr; }
+            .stat-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="navbar">
+    <div class="container">
+        <a href="official.html" class="nav-logo"><div class="logo-icon"><img src="../favicon.ico"></div>沈阳阳安信息科技技术有限公司</a>
+        <div class="nav-links" id="navLinks">
+            <a href="official.html" class="active">首页</a>
+            <a href="official-products.html">产品服务</a>
+            <a href="official-articles.html">文章发布</a>
+            <a href="official-download.html">下载中心</a>
+            <a href="official-about.html">关于我们</a>
+            <a href="official-contact.html">联系我们</a>
+        </div>
+        <div class="nav-cta">
+            <a href="https://shop.yangan.top" class="btn btn-outline btn-sm" target="_blank">阳安云聊商城</a>
+            <a href="https://chat.yangan.top" class="btn btn-primary btn-sm" target="_blank">阳安小工具</a>
+        </div>
+        <button class="hamburger" id="hamburger" aria-label="菜单"><span></span><span></span><span></span></button>
+    </div>
+</nav>
+<div class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-inner">
+        <a href="official.html" class="mobile-nav-item active"><span class="icon">🏠</span><span>首页</span></a>
+        <a href="official-products.html" class="mobile-nav-item"><span class="icon">📦</span><span>产品</span></a>
+        <a href="official-articles.html" class="mobile-nav-item"><span class="icon">📰</span><span>文章</span></a>
+        <a href="official-download.html" class="mobile-nav-item"><span class="icon">📥</span><span>下载</span></a>
+    </div>
+</div>
+
+
+<div class="about-hero">
+    <div class="container">
+        <h1>关于阳安科技</h1>
+        <p>智慧连接 · 安心购物 —— 致力于打造一站式数字化服务平台</p>
+    </div>
+</div>
+
+<!-- 使命愿景 -->
+<div class="container">
+    <div class="mission-grid">
+        <div class="mission-card fade-in">
+            <div class="m-icon">🎯</div>
+            <h3>我们的使命</h3>
+            <p>以技术创新为驱动，为用户提供便捷、安全、高效的一站式数字化服务，让智慧科技融入日常生活。</p>
+        </div>
+        <div class="mission-card fade-in">
+            <div class="m-icon">🔭</div>
+            <h3>我们的愿景</h3>
+            <p>成为最受用户信赖的数字化服务平台，构建连接人与人、人与服务的智能生态体系。</p>
+        </div>
+        <div class="mission-card fade-in">
+            <div class="m-icon">💎</div>
+            <h3>核心价值观</h3>
+            <p>用户至上、技术创新、开放协作、持续迭代，以极致的用户体验作为产品设计与服务的核心准则。</p>
+        </div>
+    </div>
+</div>
+
+<!-- 公司简介 -->
+<section class="story-section">
+    <div class="container">
+        <div class="story-grid">
+            <div class="story-visual fade-in"><span class="story-icon">🏢</span></div>
+            <div class="story-text fade-in">
+                <div class="section-tag">公司简介</div>
+                <h2>关于<span>沈阳阳安信息科技技术有限公司</span></h2>
+                <p>沈阳阳安信息科技技术有限公司成立于2018年，是一家专注于数字化服务的创新型科技企业。公司旗下拥有阳安云聊、阳安商城、阳安小工具三大核心产品，形成了完整的数字化服务生态。</p>
+                <p>我们以"信息创造价值，阳安改变未来"为核心理念，致力于通过技术创新为用户提供便捷、高效的数字化体验。无论是即时通讯、在线购物，还是小工具，阳安科技始终以用户需求为导向，持续优化产品与服务。</p>
+                <p>目前，阳安科技已服务超过1000名活跃用户，产品覆盖Windows、Android、iOS/Web三大平台，持续为用户创造价值。</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 数据统计 -->
+<div class="stat-bar">
+    <div class="container">
+        <div class="stat-grid">
+            <div class="stat-item fade-in"><div class="stat-num" data-count="1000">0</div><div class="stat-label">活跃用户</div></div>
+            <div class="stat-item fade-in"><div class="stat-num" data-count="4">0</div><div class="stat-label">核心产品</div></div>
+            <div class="stat-item fade-in"><div class="stat-num" data-count="3">0</div><div class="stat-label">支持平台</div></div>
+            <div class="stat-item fade-in"><div class="stat-num" data-count="99">0</div><div class="stat-label">服务可用率(%)</div></div>
+        </div>
+    </div>
+</div>
+
+<!-- 核心价值观 -->
+<section class="section">
+    <div class="container">
+        <div class="section-header fade-in">
+            <div class="section-tag">企业文化</div>
+            <h2 class="section-title">核心价值观</h2>
+            <p class="section-desc">它们指引着我们每一个决策和行动</p>
+        </div>
+        <div class="values-grid">
+            <div class="value-card fade-in"><div class="v-icon">👤</div><h3>用户至上</h3><p>以用户需求为核心，持续优化产品体验，让每一位用户都能感受到用心与关怀。</p></div>
+            <div class="value-card fade-in"><div class="v-icon">💡</div><h3>技术创新</h3><p>关注前沿技术发展，持续探索技术应用场景，以创新驱动产品进化。</p></div>
+            <div class="value-card fade-in"><div class="v-icon">🤝</div><h3>开放协作</h3><p>构建开放的产品生态，与合作伙伴共同成长，为用户创造更多价值。</p></div>
+            <div class="value-card fade-in"><div class="v-icon">🔄</div><h3>持续迭代</h3><p>快速响应市场变化与用户反馈，小步快跑、持续改进，保持产品竞争力。</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- 发展历程 -->
+<section class="section bg-white">
+    <div class="container">
+        <div class="section-header fade-in">
+            <div class="section-tag">发展历程</div>
+            <h2 class="section-title">阳安里程碑</h2>
+            <p class="section-desc">从创立到成长，每一步都坚实有力</p>
+        </div>
+        <div class="milestone-timeline">
+            <div class="ms-item fade-in">
+                <div class="ms-dot"></div>
+                <div class="ms-content">
+                    <span class="ms-year">2026年7月</span>
+                    <h3>阳安云聊 2.0 发布</h3>
+                    <p>全新UI界面升级，新增文件拖拽传输、红包转账、群聊@提醒等重磅功能，用户体验大幅提升。</p>
+                </div>
+            </div>
+            <div class="ms-item fade-in">
+                <div class="ms-dot"></div>
+                <div class="ms-content">
+                    <span class="ms-year">2026年5月</span>
+                    <h3>阳安商城正式上线</h3>
+                    <p>全品类电商平台上线，支持商品浏览、购物车、优惠券、余额支付等完整购物流程。</p>
+                </div>
+            </div>
+            <div class="ms-item fade-in">
+                <div class="ms-dot"></div>
+                <div class="ms-content">
+                    <span class="ms-year">2026年3月</span>
+                    <h3>云应用平台 & AI助手发布</h3>
+                    <p>云应用平台上线，即点即用无需安装；AI智能聊天助手发布，支持多轮对话与知识问答。</p>
+                </div>
+            </div>
+            <div class="ms-item fade-in">
+                <div class="ms-dot"></div>
+                <div class="ms-content">
+                    <span class="ms-year">2026年1月</span>
+                    <h3>阳安云聊发布</h3>
+                    <p>阳安云聊 1.0 正式发布，支持文字、图片消息与基础文件传输，开启智慧连接之旅。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 团队介绍 -->
+<!--<section class="section">
+    <div class="container">
+        <div class="section-header fade-in">
+            <div class="section-tag">核心团队</div>
+            <h2 class="section-title">我们的团队</h2>
+            <p class="section-desc">一支充满激情与创造力的团队，为共同的目标努力</p>
+        </div>
+        <div class="team-grid">
+            <div class="team-card fade-in">
+                <div class="avatar">👨‍💼</div>
+                <div class="t-info">
+                    <h3>创始人</h3>
+                    <div class="role">CEO & 产品负责人</div>
+                    <div class="bio">全面负责公司战略规划与产品方向，致力于打造卓越的数字化服务平台。</div>
+                </div>
+            </div>
+            <div class="team-card fade-in">
+                <div class="avatar">👨‍💻</div>
+                <div class="t-info">
+                    <h3>技术团队</h3>
+                    <div class="role">研发工程师</div>
+                    <div class="bio">负责核心产品研发与系统架构，保障平台稳定高效运行，持续技术创新。</div>
+                </div>
+            </div>
+            <div class="team-card fade-in">
+                <div class="avatar">🎨</div>
+                <div class="t-info">
+                    <h3>设计团队</h3>
+                    <div class="role">UI/UX 设计师</div>
+                    <div class="bio">专注于用户体验设计，打造简洁美观、易用的产品界面，提升用户满意度。</div>
+                </div>
+            </div>
+            <div class="team-card fade-in">
+                <div class="avatar">📊</div>
+                <div class="t-info">
+                    <h3>运营团队</h3>
+                    <div class="role">运营 & 市场</div>
+                    <div class="bio">负责产品运营推广、用户增长与客户服务，提升品牌影响力与用户粘性。</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>-->
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand"><h3>阳安科技</h3><p>智慧连接 · 安心购物</p><p style="margin-top:12px;">致力于打造一站式数字化服务平台，提供即时通讯、在线商城、云应用及AI智能聊天等全方位产品。</p></div>
+            <div class="footer-col"><h4>产品服务</h4><ul><li><a href="https://yangan.top" target="_blank">阳安云聊</a></li><li><a href="https://shop.yangan.top" target="_blank">阳安商城</a></li><li></li><li><a href="https://chat.yangan.top" target="_blank">小工具</a></li></ul></div>
+            <div class="footer-col"><h4>快速导航</h4><ul><li><a href="official-about.html">关于我们</a></li><li><a href="official-products.html">产品服务</a></li><li><a href="official-articles.html">文章解读</a></li><li><a href="official-download.html">下载中心</a></li><li><a href="official-contact.html">联系我们</a></li></ul></div>
+            <div class="footer-col"><h4>支持平台</h4><ul><li><a href="../download/yanganchat.exe">Windows 客户端</a></li><li><a href="../download/yanganonline.apk">Android 客户端</a></li><li><a href="https://yangan.top" target="_blank">Web / iOS 端</a></li></ul></div>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; 2022-2026 阳安科技 版权所有</span>
+            <span><a href="https://yangan.top">yangan.top</a> | <a href="https://shop.yangan.top">shop.yangan.top</a> | <a href="https://chat.yangan.top">chat.yanga.top</a></span>
+        </div>
+    </div>
+</footer>
+<button class="back-to-top" id="backToTop" aria-label="返回顶部">↑</button>
+
+<script src="official.js"></script>
+</body>
+</html>
