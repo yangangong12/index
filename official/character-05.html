@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>李依僇 - CEO - 阳安科技</title>
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="stylesheet" href="official.css">
+    <style>
+        .char-hero {
+            background: linear-gradient(135deg, var(--primary-darker) 0%, var(--primary-dark) 60%, var(--primary) 100%);
+            color: #fff; padding: 110px 0 56px; margin-top: var(--nav-height);
+        }
+        .char-hero-inner { display: flex; align-items: center; gap: 40px; flex-wrap: wrap; }
+        .char-avatar {
+            width: 180px; height: 180px; border-radius: 50%; overflow: hidden; flex-shrink: 0;
+            border: 4px solid rgba(255,255,255,0.35); box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+        }
+        .char-avatar img { width: 100%; height: 100%; object-fit: cover; }
+        .char-hero-info { flex: 1; min-width: 260px; }
+        .char-hero-info .char-tag {
+            display: inline-block; padding: 5px 14px; margin-bottom: 12px;
+            background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 50px; font-size: 0.8rem; font-weight: 600;
+        }
+        .char-hero-info h1 { font-size: 2.4rem; font-weight: 800; margin-bottom: 8px; }
+        .char-hero-info .char-role { font-size: 1.1rem; color: var(--accent-light); font-weight: 600; margin-bottom: 12px; }
+        .char-hero-info .char-slogan { font-size: 0.95rem; opacity: 0.85; max-width: 560px; }
+        .char-hero-info .char-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+        .char-hero-info .char-tags span {
+            font-size: 0.78rem; background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.2); border-radius: 50px; padding: 4px 12px;
+        }
+        .char-facts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: -34px; position: relative; z-index: 2; }
+        .char-fact { background: #fff; border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow-lg); text-align: center; }
+        .char-fact .fact-label { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 4px; }
+        .char-fact .fact-value { font-size: 0.95rem; font-weight: 700; color: var(--text); }
+        .char-section { background: #fff; border-radius: var(--radius); padding: 32px; box-shadow: var(--shadow); margin-bottom: 24px; }
+        .char-section h2 { font-size: 1.25rem; font-weight: 700; margin-bottom: 18px; padding-left: 14px; border-left: 4px solid var(--primary); }
+        .char-section p { color: var(--text-light); line-height: 1.9; margin-bottom: 14px; }
+        .char-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        .char-skill { display: flex; gap: 12px; align-items: flex-start; padding: 14px 16px; background: var(--bg); border-radius: var(--radius-sm); }
+        .char-skill .sk-ico { font-size: 1.3rem; }
+        .char-skill .sk-name { font-weight: 700; font-size: 0.92rem; }
+        .char-skill .sk-desc { font-size: 0.82rem; color: var(--text-light); line-height: 1.6; }
+        .char-honor { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px dashed var(--border); }
+        .char-honor:last-child { border-bottom: none; }
+        .char-honor .h-ico { font-size: 1.2rem; }
+        .char-honor .h-text { font-size: 0.92rem; }
+        .char-honor .h-year { margin-left: auto; font-size: 0.8rem; color: var(--text-muted); white-space: nowrap; }
+        .char-paper {
+            display: flex; align-items: center; gap: 14px; padding: 16px; margin-top: 16px;
+            background: var(--bg); border-radius: var(--radius-sm); border: 1px solid var(--border);
+            transition: all var(--transition); cursor: pointer;
+        }
+        .char-paper:hover { border-color: var(--primary); box-shadow: var(--shadow); }
+        .char-paper .p-ico { font-size: 1.5rem; }
+        .char-paper .p-title { font-weight: 700; font-size: 0.95rem; color: var(--primary-dark); }
+        .char-paper .p-meta { font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; }
+        .char-paper .p-arrow { margin-left: auto; color: var(--primary); font-weight: 700; }
+        .char-back { text-align: center; margin: 8px 0 40px; }
+        .char-pager { display: flex; justify-content: space-between; gap: 16px; margin-top: 28px; }
+        .char-pager a { flex: 1; background: #fff; border-radius: var(--radius); padding: 18px 24px; box-shadow: var(--shadow); transition: all var(--transition); }
+        .char-pager a:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
+        .char-pager a .p-label { font-size: 0.75rem; color: var(--text-muted); }
+        .char-pager a .p-name { font-weight: 700; margin-top: 4px; }
+        .char-pager a.next { text-align: right; }
+        @media (max-width: 768px) {
+            .char-hero-inner { justify-content: center; text-align: center; gap: 24px; }
+            .char-hero-info .char-slogan { margin: 0 auto; }
+            .char-facts { grid-template-columns: repeat(2, 1fr); }
+            .char-cols { grid-template-columns: 1fr; }
+            .char-section { padding: 22px; }
+            .char-hero-info h1 { font-size: 1.9rem; }
+        }
+        @media (max-width: 480px) { .char-facts { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="navbar">
+    <div class="container">
+        <a href="official.html" class="nav-logo"><div class="logo-icon"><img src="../favicon.ico"></div>沈阳阳安信息科技技术有限公司</a>
+        <div class="nav-links" id="navLinks">
+            <a href="official.html">首页</a>
+            <a href="official-products.html">产品服务</a>
+            <a href="official-articles.html">文章发布</a>
+            <a href="official-characters.html" class="active">人物介绍</a>
+            <a href="official-download.html">下载中心</a>
+            <a href="official-about.html">关于我们</a>
+            <a href="official-contact.html">联系我们</a>
+        </div>
+        <div class="nav-cta">
+            <a href="https://shop.yangan.top" class="btn btn-outline btn-sm" target="_blank">阳安云聊商城</a>
+            <a href="https://chat.yangan.top" class="btn btn-primary btn-sm" target="_blank">阳安小工具</a>
+        </div>
+        <button class="hamburger" id="hamburger" aria-label="菜单"><span></span><span></span><span></span></button>
+    </div>
+</nav>
+<div class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-inner">
+        <a href="official.html" class="mobile-nav-item"><span class="icon">🏠</span><span>首页</span></a>
+        <a href="official-products.html" class="mobile-nav-item"><span class="icon">📦</span><span>产品</span></a>
+        <a href="official-articles.html" class="mobile-nav-item"><span class="icon">📰</span><span>文章</span></a>
+        <a href="official-characters.html" class="mobile-nav-item active"><span class="icon">👥</span><span>人物</span></a>
+        <a href="official-download.html" class="mobile-nav-item"><span class="icon">📥</span><span>下载</span></a>
+    </div>
+</div>
+
+<section class="char-hero">
+    <div class="container">
+        <div class="char-hero-inner">
+            <div class="char-avatar">
+                <img src="images/characters/ceo-li-yixuan.jpg" alt="李依僇">
+            </div>
+            <div class="char-hero-info">
+                <span class="char-tag">阳安科技 · 创始人 / 最高层</span>
+                <h1>李依僇</h1>
+                <div class="char-role">CEO</div>
+                <p class="char-slogan">梦想环游世界而尚未启程的 CEO，以国家级身份证持有者的笃定，为阳安科技把稳每一个航向。</p>
+                <div class="char-tags">
+                    <span>战略掌舵</span>
+                    <span>环游世界梦想家</span>
+                    <span>PDD 资深买手</span>
+                    <span>诺贝尔奖觊觎者</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section" style="padding-top:60px;">
+    <div class="container">
+
+        <div class="char-facts">
+            <div class="char-fact"><div class="fact-label">所属部门</div><div class="fact-value">总裁办</div></div>
+            <div class="char-fact"><div class="fact-label">入职时间</div><div class="fact-value">2025 年</div></div>
+            <div class="char-fact"><div class="fact-label">联系方式</div><div class="fact-value">dongyi@yangan.top</div></div>
+            <div class="char-fact"><div class="fact-label">工作地点</div><div class="fact-value">沈阳</div></div>
+        </div>
+
+        <div class="char-section">
+            <h2>人物介绍</h2>
+            <p>李依僇，一位集「中国留子 · 中中混血 · 华籍华人」多重身份符号于一身、却以「已飞 0 个国家」这一朴素事实时刻警醒自己的掌舵者。她以国家级身份证持有者的身份，为阳安科技注入了某种不容置疑的确定性——毕竟，能够稳定出示证件的 CEO，其战略定力往往也与证件号码同样屹立不倒。</p>
+            <p>2025 年正式执掌公司以来，她保持着一种超然的战略克制：清华北大、雅思托福皆因「没考」而与她擦肩而过，这份对世俗评价体系的洒脱，反而成就了她作为拼多多百亿补贴质检员的专业沉淀。当问及她如何平衡「商务合作」与「公司发展」时，她一如既往地给出了清醒而坚定的回答：「不合作。」</p>
+            <p>她坚信，真正的领导力不在于飞行的公里数与学位的缩写，而在于把一件件微小的确定性，淬炼成团队前行的底气。她是管理者，是梦想的收藏家，是低价好物的守夜人——她正以「未出发」的姿态，酝酿着关于整个世界的辽阔想象。</p>
+        </div>
+
+        <div class="char-section">
+            <h2>工作职责与擅长领域</h2>
+            <div class="char-cols">
+                <div class="char-skill"><div class="sk-ico">🧭</div><div><div class="sk-name">战略方向掌舵</div><div class="sk-desc">以国家级身份证持有者的定力，为公司划定「今日可辨、明日可期」的发展航向。</div></div></div>
+                <div class="char-skill"><div class="sk-ico">🔍</div><div><div class="sk-name">百亿补贴质检</div><div class="sk-desc">长期深耕拼多多百亿补贴一线，洞察全民消费趋势，被誉为「性价比的守夜人」。</div></div></div>
+                <div class="char-skill"><div class="sk-ico">🌱</div><div><div class="sk-name">梦想管理</div><div class="sk-desc">规划并珍藏「环游世界」这一战略级愿景，持续推动其由理想状态迈向落地准备阶段。</div></div></div>
+                <div class="char-skill"><div class="sk-ico">🎓</div><div><div class="sk-name">评价体系超脱</div><div class="sk-desc">以「没考」的从容超脱清华北大与雅思托福，为团队树立不为标签所困的典范。</div></div></div>
+            </div>
+        </div>
+
+        <div class="char-section">
+            <h2>荣誉与成就</h2>
+            <div class="char-honor"><div class="h-ico">🏅</div><div class="h-text">荣获 2022 国际奥委会「奥林匹克杯」</div><div class="h-year">2022 年</div></div>
+            <a class="char-paper" href="http://47.80.18.168/article/view.php?id=9" target="_blank">
+                <div class="p-ico">📄</div>
+                <div>
+                    <div class="p-title">《电解水制备过氧化氢（H₂O₂）的反应机理与工艺优化研究》</div>
+                    <div class="p-meta">代表性论著 · 点击阅读全文</div>
+                </div>
+                <div class="p-arrow">→</div>
+            </a>
+        </div>
+
+        <div class="char-back">
+            <a href="official-characters.html" class="btn btn-primary">← 返回人物列表</a>
+        </div>
+        <div class="char-pager">
+            <a href="character-04.html"><div class="p-label">上一个</div><div class="p-name">陈晓彤</div></a>
+            <a href="character-01.html" class="next"><div class="p-label">下一个</div><div class="p-name">张明远</div></a>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand"><h3>阳安科技</h3><p>智慧连接 · 安心购物</p><p style="margin-top:12px;">致力于打造一站式数字化服务平台，提供即时通讯、在线商城、云应用及AI智能聊天等全方位产品。</p></div>
+            <div class="footer-col"><h4>产品服务</h4><ul><li><a href="https://yangan.top" target="_blank">阳安云聊</a></li><li><a href="https://shop.yangan.top" target="_blank">阳安商城</a></li><li></li><li><a href="https://chat.yangan.top" target="_blank">小工具</a></li></ul></div>
+            <div class="footer-col"><h4>快速导航</h4><ul><li><a href="official-about.html">关于我们</a></li><li><a href="official-products.html">产品服务</a></li><li><a href="official-articles.html">文章解读</a></li><li><a href="official-characters.html">人物介绍</a></li><li><a href="official-download.html">下载中心</a></li><li><a href="official-contact.html">联系我们</a></li></ul></div>
+            <div class="footer-col"><h4>支持平台</h4><ul><li><a href="../download/yanganchat.exe">Windows 客户端</a></li><li><a href="../download/yanganonline.apk">Android 客户端</a></li><li><a href="https://yangan.top" target="_blank">Web / iOS 端</a></li></ul></div>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; 2022-2026 阳安科技 版权所有</span>
+            <span><a href="https://yangan.top">yangan.top</a> | <a href="https://shop.yangan.top">shop.yangan.top</a> | <a href="https://chat.yangan.top">chat.yanga.top</a></span>
+        </div>
+    </div>
+</footer>
+<button class="back-to-top" id="backToTop" aria-label="返回顶部">↑</button>
+
+<script src="official.js"></script>
+</body>
+</html>
